@@ -1,6 +1,7 @@
 ---
 // src/layouts/BaseLayout.astro
 import { getCollection } from 'astro:content';
+import '../styles/global.css';
 
 const { title = "DoWithSudo", reference } = Astro.props;
 
@@ -8,30 +9,25 @@ const url = Astro.url;
 const pathname = url.pathname;
 const siteUrl = Astro.site || 'https://dowithsudo.com';
 
-// 1. Logika mendeteksi bahasa saat ini
 const isEn = pathname.startsWith('/en');
 
-// 2. Logika Menghasilkan URL bahasa alternatif (Pintar)
+// --- LOGIKA SMART SWITCHER (Pencarian Pasangan Artikel) ---
 let alternatePath = isEn ? '/id/' : '/en/';
-
 if (reference) {
-  // Jika halaman ini adalah artikel blog (punya reference)
   const allPosts = await getCollection('blog');
   const partner = allPosts.find(p => 
     p.data.reference === reference && 
     (isEn ? p.id.startsWith('id/') : p.id.startsWith('en/'))
   );
-
   if (partner) {
-    // Ambil slug dari file pasangannya
-    const partnerSlug = partner.id.split('/').pop()?.split('.')[0];
+    // Menangani slug baik dari folder bundle maupun file .md
+    const partnerSlug = partner.id
+      .split('/').pop()?.replace(/\/index\.(md|mdx)$/, '').replace(/\.(md|mdx)$/, '');
     alternatePath = isEn ? `/id/blog/${partnerSlug}` : `/en/blog/${partnerSlug}`;
   } else {
-    // Jika tidak ada pasangan, balikkan ke daftar blog bahasa tersebut
     alternatePath = isEn ? '/id/blog/' : '/en/blog/';
   }
 } else {
-  // Jika halaman umum (Home atau List Blog)
   if (pathname.includes('/blog')) {
     alternatePath = isEn ? '/id/blog/' : '/en/blog/';
   } else {
@@ -39,84 +35,72 @@ if (reference) {
   }
 }
 
-// 3. Menyiapkan Absolute URL untuk SEO tags
-// Untuk SEO, kita gunakan path pintar yang sudah ditemukan di atas
 const currentUrl = new URL(pathname, siteUrl);
 const idUrl = new URL(isEn ? alternatePath : pathname, siteUrl);
 const enUrl = new URL(isEn ? pathname : alternatePath, siteUrl);
 ---
 
-<html lang={isEn ? 'en' : 'id'}>
+<html lang={isEn ? 'en' : 'id'} class="scroll-smooth">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>{title}</title>
+    <title>{title} | DoWithSudo</title>
 
     <link rel="canonical" href={currentUrl} />
     <link rel="alternate" hreflang="id" href={idUrl} />
     <link rel="alternate" hreflang="en" href={enUrl} />
     <link rel="alternate" hreflang="x-default" href={idUrl} />
   </head>
-  <body>
-    <nav>
-      <div class="menu">
-        <a href={isEn ? '/en/' : '/id/'}><strong>DoWithSudo</strong></a>
-        <a href={isEn ? '/en/blog/' : '/id/blog/'}>Blog</a>
-      </div>
-
-      <div class="lang-switcher">
-        {isEn ? (
-          <a href={alternatePath} title="Ubah ke Bahasa Indonesia">
-            <span class="flag">🇮🇩</span> ID
+  
+  <body class="bg-slate-50 text-slate-900 antialiased min-h-screen flex flex-col">
+    <header class="sticky top-0 z-40 w-full backdrop-blur-md bg-white/75 border-b border-slate-200">
+      <nav class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div class="flex gap-6 items-center">
+          <a href={isEn ? '/en/' : '/id/'} class="text-xl font-black tracking-tighter hover:text-blue-600 transition-colors">
+            <span class="text-blue-600">>_</span>DoWithSudo
           </a>
-        ) : (
-          <a href={alternatePath} title="Change to English">
-            <span class="flag">🇺🇸</span> EN
+          <a href={isEn ? '/en/blog/' : '/id/blog/'} class="text-sm font-medium hover:text-blue-600 transition-colors">
+            Blog
           </a>
-        )}
-      </div>
-    </nav>
+        </div>
 
-    <hr />
+        <div class="flex items-center gap-4">
+          <a 
+            href={alternatePath} 
+            id="lang-switcher"
+            data-target-lang={isEn ? 'id' : 'en'}
+            class="text-xs font-bold px-3 py-1.5 rounded-full border border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 transition-all flex items-center gap-2"
+          >
+            {isEn ? (
+              <><span>🇮🇩</span> <span class="hidden sm:inline">Bahasa Indonesia</span><span class="sm:hidden">ID</span></>
+            ) : (
+              <><span>🇺🇸</span> <span class="hidden sm:inline">English</span><span class="sm:hidden">EN</span></>
+            )}
+          </a>
+        </div>
+      </nav>
+    </header>
 
-    <main>
+    <main class="grow max-w-4xl w-full mx-auto px-4 py-12">
       <slot />
     </main>
 
-    <style>
-      nav { 
-        display: flex; 
-        justify-content: space-between; 
-        align-items: center;
-        padding: 1rem; 
-        max-width: 800px;
-        margin: 0 auto;
+    <footer class="border-t border-slate-200 py-8 bg-white mt-auto">
+      <div class="max-w-4xl mx-auto px-4 text-center text-slate-500 text-sm">
+        <p>&copy; {new Date().getFullYear()} DoWithSudo. Built with Astro & Tailwind v4.</p>
+      </div>
+    </footer>
+
+    <script is:inline>
+      // Ambil elemen switcher
+      const switcher = document.getElementById('lang-switcher');
+      if (switcher) {
+        switcher.addEventListener('click', () => {
+          const lang = switcher.getAttribute('data-target-lang');
+          // Simpan preferensi bahasa ke localStorage
+          localStorage.setItem('preferred-lang', lang);
+        });
       }
-      .menu { display: flex; gap: 1.5rem; }
-      .menu a { text-decoration: none; color: inherit; font-weight: 500; }
-      
-      .lang-switcher a { 
-        text-decoration: none; 
-        font-weight: bold; 
-        border: 1px solid #ddd; 
-        padding: 4px 12px; 
-        border-radius: 20px;
-        font-size: 0.9rem;
-        transition: all 0.2s;
-        display: flex;
-        align-items: center;
-      }
-      .lang-switcher a:hover {
-        background: #f4f4f4;
-        border-color: #bbb;
-      }
-      .flag { margin-right: 6px; line-height: 1; }
-      
-      main {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 1rem;
-      }
-    </style>
+    </script>
   </body>
 </html>

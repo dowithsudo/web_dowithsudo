@@ -1,46 +1,70 @@
 ---
 import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
-// 1. Beritahu Astro slug apa saja yang tersedia di folder 'id'
 export async function getStaticPaths() {
+  // Ambil semua konten di folder 'id/'
   const posts = await getCollection('blog', ({ id }) => id.startsWith('id/'));
   
-  return posts.map(post => ({
-    // Mengambil nama file sebagai slug URL
-    params: { slug: post.id.split('/').pop()?.split('.')[0] },
-    props: { post },
-  }));
+  return posts.map(post => {
+    // Logika slug yang kuat untuk folder bundle maupun file tunggal
+    const slug = post.id
+      .replace(/^id\//, '')
+      .replace(/\/index\.(md|mdx)$/, '')
+      .replace(/\.(md|mdx)$/, '');
+
+    return {
+      params: { slug },
+      props: { post },
+    };
+  });
 }
 
-// 2. Ambil data post dari props
 const { post } = Astro.props;
-
-// 3. Render konten markdown menjadi komponen HTML
 const { Content } = await render(post);
 ---
 
 <BaseLayout title={post.data.title} reference={post.data.reference}>
-  <article>
-    <h1>{post.data.title}</h1>
-    <p>Dipublikasikan pada: {post.data.date.toLocaleDateString('id-ID', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    })}</p>
-    <hr />
-    <Content />
+  <article class="mx-auto">
+    <header class="mb-8 px-1">
+      <h1 class="text-4xl font-black tracking-tight mb-4 text-slate-900 leading-tight lg:text-5xl">
+        {post.data.title}
+      </h1>
+      
+      <div class="flex items-center text-sm text-slate-500 gap-2 font-medium">
+        <time datetime={post.data.date.toISOString()}>
+          {post.data.date.toLocaleDateString('id-ID', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })}
+        </time>
+        {post.data.description && (
+          <>
+            <span class="text-slate-300">•</span>
+            <span>{post.data.description}</span>
+          </>
+        )}
+      </div>
+    </header>
+
+    {post.data.cover && (
+      <div class="mb-10 overflow-hidden rounded-2xl border border-slate-200 shadow-sm bg-slate-100">
+        <Image 
+          src={post.data.cover} 
+          alt={post.data.coverAlt || post.data.title}
+          class="w-full h-auto object-cover max-h-112.5"
+          loading="eager" 
+        />
+      </div>
+    )}
+
+    <div class="prose prose-slate prose-blue max-w-none lg:prose-lg 
+                prose-headings:tracking-tight prose-headings:font-bold
+                prose-img:rounded-xl prose-img:border prose-img:border-slate-100
+                prose-code:text-blue-600 prose-code:bg-blue-50 prose-code:px-1 prose-code:rounded prose-code:before:content-none prose-code:after:content-none">
+      <Content />
+    </div>
   </article>
 </BaseLayout>
-
-<style>
-  article {
-    line-height: 1.6;
-  }
-  h1 {
-    margin-bottom: 0.5rem;
-  }
-  p {
-    color: #666;
-  }
-</style>

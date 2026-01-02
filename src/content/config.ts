@@ -3,14 +3,16 @@ import { glob } from 'astro/loaders';
 
 const blog = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/blog" }),
-  schema: z.object({
+  // Tambahkan ({ image }) di bawah ini untuk mengaktifkan optimasi gambar
+  schema: ({ image }) => z.object({
     title: z.string(),
-    // Membuat description opsional agar tidak error jika lupa diisi
     description: z.string().optional(), 
-    // Reference tetap wajib agar sistem ganti bahasa tidak rusak
     reference: z.string(), 
-    // Pastikan format di Markdown adalah YYYY-MM-DD
     date: z.coerce.date(), 
+    // Field 'cover' sekarang mendukung optimasi otomatis (WebP/AVIF/Resize)
+    // Dibuat .optional() supaya postingan tanpa gambar tidak error
+    cover: image().optional(),
+    coverAlt: z.string().optional(),
   }),
 });
 

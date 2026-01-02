@@ -1,4 +1,36 @@
 ---
 // src/pages/index.astro
+// Halaman ini tidak me-render HTML, hanya sebagai "traffic controller"
 ---
-<meta http-equiv="refresh" content="0;url=/id/" />
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="refresh" content="0;url=/id/" />
+    
+    <script is:inline>
+      // 1. Cek apakah user pernah memilih bahasa secara manual sebelumnya (opsional, via localStorage)
+      const savedLang = localStorage.getItem('preferred-lang');
+      
+      // 2. Jika tidak ada, cek bahasa browser (contoh: "en-US" atau "id-ID")
+      const browserLang = navigator.language.toLowerCase();
+      
+      // 3. Tentukan tujuan
+      let targetLang = 'id'; // Default
+      
+      if (savedLang) {
+        targetLang = savedLang;
+      } else if (browserLang.startsWith('en')) {
+        targetLang = 'en';
+      }
+      
+      // 4. Eksekusi pengalihan
+      window.location.pathname = `/${targetLang}/`;
+    </script>
+  </head>
+  <body style="background: #0f172a;">
+    <div style="font-family: sans-serif; color: white; display: flex; justify-content: center; align-items: center; height: 100vh;">
+      <p>Redirecting...</p>
+    </div>
+  </body>
+</html>

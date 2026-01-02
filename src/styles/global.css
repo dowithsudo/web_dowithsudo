@@ -1,0 +1,7 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography"; /* Tambahkan baris ini */
+
+/* Anda bisa menambahkan font atau custom theme di bawah sini jika perlu */
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}

@@ -1,26 +1,66 @@
 ---
 import { getCollection } from 'astro:content';
-// Menggunakan alias @ yang tadi kita setting di tsconfig.json
+import { Image } from 'astro:assets';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
-// Filter konten yang ID-nya diawali dengan 'id/'
-const posts = await getCollection('blog', (entry) => entry.id.startsWith('id/'));
+// Ambil semua post ID, urutkan dari yang terbaru (descending)
+const posts = (await getCollection('blog', (entry) => entry.id.startsWith('id/')))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
-<BaseLayout title="Blog Saya">
-  <h1>Daftar Artikel</h1>
-  <ul>
-    {posts.map(post => {
-      // Mengambil slug saja (misal dari "id/test.md" menjadi "test")
-      const slug = post.id.split('/').pop()?.split('.')[0];
-      
-      return (
-        <li>
-          <a href={`/id/blog/${slug}`}>
-            {post.data.title}
-          </a>
-        </li>
-      );
-    })}
-  </ul>
+<BaseLayout title="Arsip Blog">
+  <section class="max-w-4xl mx-auto py-8">
+    <header class="mb-12 border-l-4 border-blue-600 pl-6">
+      <h1 class="text-4xl font-black tracking-tight text-slate-900 mb-2">Catatan Digital</h1>
+      <p class="text-slate-500 text-lg">Tutorial, tips terminal, dan dokumentasi koding.</p>
+    </header>
+
+    <div class="grid gap-10 sm:grid-cols-2">
+      {posts.map((post) => {
+        // Logika slug baru: support folder bundle maupun file tunggal
+        const slug = post.id
+          .replace(/^id\//, '')
+          .replace(/\/index\.(md|mdx)$/, '')
+          .replace(/\.(md|mdx)$/, '');
+
+        return (
+          <article class="group flex flex-col">
+            <a href={`/id/blog/${slug}`} class="block overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 mb-4 shadow-sm transition-all group-hover:border-blue-400 group-hover:shadow-md">
+              {post.data.cover ? (
+                <Image 
+                  src={post.data.cover} 
+                  alt={post.data.coverAlt || post.data.title}
+                  class="aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  width={720}
+                  height={405}
+                />
+              ) : (
+                <div class="aspect-video flex items-center justify-center bg-slate-200 text-slate-400 font-bold text-3xl tracking-tighter uppercase">
+                  DWS.
+                </div>
+              )}
+            </a>
+            
+            <div class="flex flex-col grow">
+              <time datetime={post.data.date.toISOString()} class="text-xs font-bold text-blue-600 uppercase tracking-widest mb-2">
+                {post.data.date.toLocaleDateString('id-ID', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+              
+              <h2 class="text-2xl font-bold text-slate-900 mb-3 leading-tight group-hover:text-blue-600 transition-colors">
+                <a href={`/id/blog/${slug}`}>{post.data.title}</a>
+              </h2>
+              
+              <p class="text-slate-600 line-clamp-2 text-sm leading-relaxed mb-4">
+                {post.data.description || "Klik untuk membaca artikel selengkapnya..."}
+              </p>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </section>
 </BaseLayout>
