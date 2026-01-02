@@ -14,11 +14,12 @@
   --color-secondary: hsl(210 20% 96%);
   --color-secondary-foreground: hsl(215 25% 17%);
 
-  --color-accent: hsl(174 62% 40%); /* Warna Teal di Logo/Tombol */
-  --color-accent-foreground: hsl(0 0% 100%);
+  /* PERBAIKAN KONTRAS: Menggunakan warna gelap untuk teks di atas background Teal */
+  --color-accent: hsl(174 62% 40%); 
+  --color-accent-foreground: hsl(174 90% 12%); /* Jauh lebih kontras dibanding putih */
 
   --color-muted: hsl(210 20% 96%);
-  --color-muted-foreground: hsl(215 14% 45%);
+  --color-muted-foreground: hsl(215 20% 35%); /* Sedikit digelapkan agar lulus audit */
 
   --color-border: hsl(214 20% 90%);
   --color-input: hsl(214 20% 90%);
@@ -29,6 +30,10 @@
 
 /* Base Styles */
 @layer base {
+  /* OPTIMASI PERFORMANCE: 
+     Hapus @import font dari sini jika sudah ditaruh di BaseLayout.astro. 
+     Jika tetap di sini, tambahkan display=swap.
+  */
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
   html {
@@ -77,5 +82,6 @@
 
 .prose h3::before {
   content: counter(h2-counter) "." counter(h3-counter) " ";
-  @apply text-accent/70 mr-2 text-sm;
+  /* Gunakan opacity yang lebih tinggi (80+) agar tetap lulus audit kontras */
+  @apply text-accent/85 mr-2 text-sm;
 }
