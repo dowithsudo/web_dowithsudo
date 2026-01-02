@@ -14,25 +14,28 @@ const siteUrl = Astro.site || 'https://dowithsudo.com';
 const isEn = pathname.startsWith('/en');
 
 // --- LOGIKA SMART SWITCHER ---
+// --- LOGIKA SMART SWITCHER (VERSI FIX) ---
 let alternatePath = isEn ? '/id/' : '/en/';
+
 if (reference) {
+  // ... (logika blog partner tetap sama)
   const allPosts = await getCollection('blog');
   const partner = allPosts.find(p => 
     p.data.reference === reference && 
     (isEn ? p.id.startsWith('id/') : p.id.startsWith('en/'))
   );
   if (partner) {
-    const partnerSlug = partner.id
-      .split('/').pop()?.replace(/\/index\.(md|mdx)$/, '').replace(/\.(md|mdx)$/, '');
+    const partnerSlug = partner.id.split('/').pop()?.replace(/\.(md|mdx)$/, '');
     alternatePath = isEn ? `/id/blog/${partnerSlug}` : `/en/blog/${partnerSlug}`;
   } else {
     alternatePath = isEn ? '/id/blog/' : '/en/blog/';
   }
 } else {
-  if (pathname.includes('/blog')) {
-    alternatePath = isEn ? '/id/blog/' : '/en/blog/';
+  // LOGIKA DINAMIS UNTUK HALAMAN STATIS (About, Services, Contact)
+  if (isEn) {
+    alternatePath = pathname.replace('/en/', '/id/');
   } else {
-    alternatePath = isEn ? '/id/' : '/en/';
+    alternatePath = pathname.replace('/id/', '/en/');
   }
 }
 
@@ -45,6 +48,7 @@ const enUrl = new URL(isEn ? pathname : alternatePath, siteUrl);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title} | DoWithSudo</title>
 
     <link rel="canonical" href={currentUrl} />
