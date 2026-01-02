@@ -16,10 +16,10 @@
 
   /* PERBAIKAN KONTRAS: Menggunakan warna gelap untuk teks di atas background Teal */
   --color-accent: hsl(174 62% 40%); 
-  --color-accent-foreground: hsl(174 90% 12%); /* Jauh lebih kontras dibanding putih */
+  --color-accent-foreground: hsl(174 95% 8%); /* Jauh lebih kontras dibanding putih */
 
   --color-muted: hsl(210 20% 96%);
-  --color-muted-foreground: hsl(215 20% 35%); /* Sedikit digelapkan agar lulus audit */
+  --color-muted-foreground: hsl(215 25% 30%); /* Sedikit digelapkan agar lulus audit */
 
   --color-border: hsl(214 20% 90%);
   --color-input: hsl(214 20% 90%);

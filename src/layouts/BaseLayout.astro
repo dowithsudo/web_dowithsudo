@@ -39,7 +39,6 @@ if (reference) {
   if (isEn) {
     alternatePath = pathname.replace('/en/', '/id/') || '/id/';
   } else {
-    // Memastikan jika root atau /id/ diubah ke /en/
     alternatePath = pathname.startsWith('/id/') ? pathname.replace('/id/', '/en/') : `/en${pathname}`;
   }
 }
@@ -57,9 +56,12 @@ const enUrl = new URL(isEn ? pathname : alternatePath, siteUrl);
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+    
     <link 
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" 
       rel="stylesheet" 
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" 
       media="print" 
       onload="this.media='all'"
     >
@@ -86,7 +88,7 @@ const enUrl = new URL(isEn ? pathname : alternatePath, siteUrl);
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', gaId);
+          gtag('config', gaId, { 'font_display': 'swap' });
         </script>
       </Fragment>
     )}
