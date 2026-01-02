@@ -6,7 +6,8 @@ const blog = defineCollection({
   // Tambahkan ({ image }) di bawah ini untuk mengaktifkan optimasi gambar
   schema: ({ image }) => z.object({
     title: z.string(),
-    description: z.string().optional(), 
+    description: z.string().optional(),
+    category: z.string().default("General"), 
     reference: z.string(), 
     date: z.coerce.date(), 
     // Field 'cover' sekarang mendukung optimasi otomatis (WebP/AVIF/Resize)

@@ -3,64 +3,152 @@ import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
-// Ambil semua post ID, urutkan dari yang terbaru (descending)
+// Ambil data post ID 'id/'
 const posts = (await getCollection('blog', (entry) => entry.id.startsWith('id/')))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// Filter kategori unik
+const categories = ["All", ...new Set(posts.map((post) => (post.data as any).category || "General"))];
 ---
 
-<BaseLayout title="Arsip Blog">
-  <section class="max-w-4xl mx-auto py-8">
-    <header class="mb-12 border-l-4 border-blue-600 pl-6">
-      <h1 class="text-4xl font-black tracking-tight text-slate-900 mb-2">Catatan Digital</h1>
-      <p class="text-slate-500 text-lg">Tutorial, tips terminal, dan dokumentasi koding.</p>
-    </header>
+<BaseLayout title="Blog">
+  <main class="min-h-screen bg-white">
+    {/* Hero Section - Menggunakan warna latar lembut */}
+    <section class="py-16 md:py-24 bg-[#F8F9FA]">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="max-w-3xl">
+          <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">
+            Blog
+          </h1>
+          <p class="text-lg text-slate-500 leading-relaxed">
+            Indo IT tips, tutorials, and insights to help your business stay ahead.
+          </p>
+        </div>
+      </div>
+    </section>
 
-    <div class="grid gap-10 sm:grid-cols-2">
-      {posts.map((post) => {
-        // Logika slug baru: support folder bundle maupun file tunggal
-        const slug = post.id
-          .replace(/^id\//, '')
-          .replace(/\/index\.(md|mdx)$/, '')
-          .replace(/\.(md|mdx)$/, '');
+    {/* Category Filter */}
+    <section class="py-8 border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-wrap gap-2" id="category-filters">
+          {categories.map((category) => (
+            <button
+              data-category={category}
+              class="filter-btn inline-flex items-center justify-center rounded-md text-sm font-medium transition-all border border-slate-200 h-9 px-4 hover:border-[#26a69a] hover:text-[#26a69a]"
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
 
-        return (
-          <article class="group flex flex-col">
-            <a href={`/id/blog/${slug}`} class="block overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 mb-4 shadow-sm transition-all group-hover:border-blue-400 group-hover:shadow-md">
-              {post.data.cover ? (
-                <Image 
-                  src={post.data.cover} 
-                  alt={post.data.coverAlt || post.data.title}
-                  class="aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  width={720}
-                  height={405}
-                />
-              ) : (
-                <div class="aspect-video flex items-center justify-center bg-slate-200 text-slate-400 font-bold text-3xl tracking-tighter uppercase">
-                  DWS.
-                </div>
-              )}
-            </a>
-            
-            <div class="flex flex-col grow">
-              <time datetime={post.data.date.toISOString()} class="text-xs font-bold text-blue-600 uppercase tracking-widest mb-2">
-                {post.data.date.toLocaleDateString('id-ID', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric'
-                })}
-              </time>
-              
-              <h2 class="text-2xl font-bold text-slate-900 mb-3 leading-tight group-hover:text-blue-600 transition-colors">
-                <a href={`/id/blog/${slug}`}>{post.data.title}</a>
-              </h2>
-              
-              <p class="text-slate-600 line-clamp-2 text-sm leading-relaxed mb-4">
-                {post.data.description || "Klik untuk membaca artikel selengkapnya..."}
-              </p>
-            </div>
-          </article>
-        );
-      })}
-    </div>
-  </section>
+    {/* Blog Grid */}
+    <section class="py-16 md:py-24">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="blog-grid">
+          {posts.map((post) => {
+            const slug = post.id.replace(/^id\//, '').replace(/\/index\.(md|mdx)$/, '').replace(/\.(md|mdx)$/, '');
+            const category = (post.data as any).category || "General";
+
+            return (
+              <article class="blog-card group" data-category={category}>
+                <a href={`/id/blog/${slug}`} class="block h-full">
+                  <div class="bg-white rounded-lg border border-slate-200 overflow-hidden hover:border-[#26a69a]/50 transition-all duration-300 flex flex-col h-full shadow-sm">
+                    
+                    {/* Thumbnail Container - Fixed Aspect Ratio */}
+                    <div class="relative aspect-video bg-[#F1F5F9] overflow-hidden">
+                      {post.data.cover ? (
+                        <Image 
+                          src={post.data.cover} 
+                          alt={post.data.title}
+                          class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          width={800} 
+                          height={450}
+                        />
+                      ) : (
+                        <div class="flex items-center justify-center h-full">
+                           <span class="text-4xl opacity-20 group-hover:scale-110 transition-transform">📝</span>
+                        </div>
+                      )}
+                    </div>
+                    
+                    {/* Content Section */}
+                    <div class="p-6 flex flex-col grow">
+                      {/* Badge Tosca */}
+                      <span class="inline-block px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-[#26a69a] bg-[#26a69a]/10 rounded mb-3 w-fit">
+                        {category}
+                      </span>
+                      
+                      <h2 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-[#26a69a] transition-colors line-clamp-2 leading-snug">
+                        {post.data.title}
+                      </h2>
+                      
+                      <p class="text-sm text-slate-500 mb-4 line-clamp-2 leading-relaxed">
+                        {post.data.description || "Klik untuk membaca artikel tutorial dan tips selengkapnya..."}
+                      </p>
+                      
+                      <div class="mt-auto pt-4 border-t border-slate-50 flex items-center justify-between">
+                        <time class="text-[11px] font-medium text-slate-400 uppercase tracking-tight">
+                          {post.data.date.toLocaleDateString("id-ID", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          })}
+                        </time>
+                        <span class="text-[#26a69a] font-bold text-[11px] opacity-0 group-hover:opacity-100 transition-opacity uppercase">
+                           Read More →
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  </main>
 </BaseLayout>
+
+<script>
+  const buttons = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.blog-card');
+
+  const updateActiveStyle = (selectedCat: string) => {
+    buttons.forEach(btn => {
+      const isSelected = btn.getAttribute('data-category') === selectedCat;
+      if (isSelected) {
+        // Active Style: Tosca Background
+        btn.classList.add('bg-[#26a69a]', 'text-white', 'border-[#26a69a]');
+        btn.classList.remove('bg-white', 'text-slate-900', 'border-slate-200');
+      } else {
+        // Default Style
+        btn.classList.remove('bg-[#26a69a]', 'text-white', 'border-[#26a69a]');
+        btn.classList.add('bg-white', 'text-slate-900', 'border-slate-200');
+      }
+    });
+  };
+
+  // Set default active category
+  updateActiveStyle("All");
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const category = btn.getAttribute('data-category');
+      if (!category) return;
+
+      updateActiveStyle(category);
+
+      cards.forEach(card => {
+        const cardCat = card.getAttribute('data-category');
+        if (category === 'All' || category === 'Semua' || cardCat === category) {
+          (card as HTMLElement).style.display = 'block';
+        } else {
+          (card as HTMLElement).style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

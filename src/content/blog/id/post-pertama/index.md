@@ -5,6 +5,7 @@ date: 2024-05-20
 reference: "post-pertama"
 cover: "./cover.png"  # Path relatif ke file gambar
 coverAlt: "cover post"
+categories: "server"
 ---
 Ini post pertama
 

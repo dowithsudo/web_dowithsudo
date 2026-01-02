@@ -5,6 +5,7 @@ date: 2024-05-20
 reference: "post-kedua"
 cover: "./cover.png"
 coverAlt: "cover post"
+categories: :"test"
 ---
 Ini post kedua
 

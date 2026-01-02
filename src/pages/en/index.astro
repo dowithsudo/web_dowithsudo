@@ -1,5 +1,4 @@
 ---
-// src/pages/en/index.astro
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/home/Hero.astro';
 import Problems from '../../components/home/Problems.astro';
@@ -9,11 +8,11 @@ import WhyChooseMe from '../../components/home/WhyChooseMe.astro';
 import HowItWorks from '../../components/home/HowItWorks.astro';
 import CTA from '../../components/home/CTA.astro';
 
-// Set true untuk mengaktifkan konten Bahasa Inggris di semua komponen
+// Set ke true untuk mengaktifkan konten bahasa Inggris di semua komponen
 const isEn = true;
 ---
 
-<BaseLayout title="Trusted IT Partner | DoWithSudo" isEn={isEn}>
+<BaseLayout title="Your Trusted IT Partner | DoWithSudo">
   <Hero isEn={isEn} />
   <Problems isEn={isEn} />
   <Solutions isEn={isEn} />
