@@ -7,12 +7,14 @@ const navLinks = [
   { name: "Services", path: isEn ? "/en/services/" : "/id/services/" },
   { name: "Blog", path: isEn ? "/en/blog/" : "/id/blog/" },
   { name: "About", path: isEn ? "/en/about/" : "/id/about/" },
+  { name: isEn ? "Contact" : "Kontak", path: isEn ? "/en/contact/" : "/id/contact/" }, // Ditambahkan di akhir
 ];
 
 const isActive = (path: string) => {
   if (path === '/id/' || path === '/en/') {
     return currentPath === path;
   }
+  // Menghindari active state ganda jika path adalah sub-path
   return currentPath.startsWith(path);
 };
 ---
@@ -60,7 +62,7 @@ const isActive = (path: string) => {
         class="md:hidden p-2 -mr-2 text-foreground"
         aria-label="Toggle menu"
       >
-        <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="12"/></svg>
+        <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
         <svg id="close-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
       </button>
     </div>
@@ -81,7 +83,7 @@ const isActive = (path: string) => {
         ))}
         <div class="pt-4 pb-2 px-2 flex flex-col gap-3">
             <a href={alternatePath} class="text-center py-2 border border-border rounded-md font-medium">
-                Switch to {isEn ? "Bahasa Indonesia" : "English"}
+                {isEn ? "Ganti ke Bahasa Indonesia" : "Switch to English"}
             </a>
             <a href={isEn ? "/en/contact" : "/id/contact"} class="w-full text-center bg-accent py-3 rounded-md text-accent-foreground font-medium">
                 {isEn ? "Get a Quote" : "Hubungi Kami"}
