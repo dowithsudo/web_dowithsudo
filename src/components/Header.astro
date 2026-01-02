@@ -4,10 +4,10 @@ const { isEn, alternatePath, currentPath } = Astro.props;
 
 const navLinks = [
   { name: isEn ? "Home" : "Beranda", path: isEn ? "/en/" : "/id/" },
-  { name: "Services", path: isEn ? "/en/services/" : "/id/services/" },
-  { name: "Blog", path: isEn ? "/en/blog/" : "/id/blog/" },
-  { name: "About", path: isEn ? "/en/about/" : "/id/about/" },
-  { name: isEn ? "Contact" : "Kontak", path: isEn ? "/en/contact/" : "/id/contact/" }, // Ditambahkan di akhir
+  { name: isEn ? "Services" : "Layanan", path: isEn ? "/en/services/" : "/id/services/" },
+  { name: isEn ? "Blog" : "Blog", path: isEn ? "/en/blog/" : "/id/blog/" },
+  { name: isEn ? "About" : "Tentang", path: isEn ? "/en/about/" : "/id/about/" },
+  { name: isEn ? "Contact" : "Kontak", path: isEn ? "/en/contact/" : "/id/contact/" },
 ];
 
 const isActive = (path: string) => {
