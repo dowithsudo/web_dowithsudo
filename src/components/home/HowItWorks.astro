@@ -1,0 +1,76 @@
+---
+// src/components/home/HowItWorks.astro
+const { isEn } = Astro.props;
+
+const content = {
+  title: isEn ? "How It Works" : "Cara Kerja",
+  subtitle: isEn 
+    ? "Simple, straightforward process to get your IT issues resolved." 
+    : "Proses sederhana dan jelas untuk menyelesaikan masalah IT Anda.",
+};
+
+const steps = [
+  {
+    step: "01",
+    title: isEn ? "Contact Me" : "Hubungi Saya",
+    description: isEn 
+      ? "Reach out via phone, email, or the contact form. Describe your IT challenge." 
+      : "Hubungi melalui telepon, email, atau formulir kontak. Jelaskan masalah IT Anda.",
+  },
+  {
+    step: "02",
+    title: isEn ? "Assessment" : "Asesmen",
+    description: isEn 
+      ? "I'll assess your needs and provide a clear scope of work and pricing." 
+      : "Saya akan menilai kebutuhan Anda dan memberikan cakupan kerja serta harga yang jelas.",
+  },
+  {
+    step: "03",
+    title: isEn ? "Resolution" : "Resolusi",
+    description: isEn 
+      ? "On-site or remote support to solve your IT issues efficiently." 
+      : "Dukungan langsung di lokasi atau jarak jauh untuk menyelesaikan masalah secara efisien.",
+  },
+  {
+    step: "04",
+    title: isEn ? "Follow-up" : "Tindak Lanjut",
+    description: isEn 
+      ? "Post-service support and documentation for future reference." 
+      : "Dukungan pasca-layanan dan dokumentasi untuk referensi di masa mendatang.",
+  },
+];
+---
+
+<section class="section-padding bg-background overflow-hidden">
+  <div class="container-custom">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-5xl font-bold text-foreground mb-4">
+        {content.title}
+      </h2>
+      <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+        {content.subtitle}
+      </p>
+    </div>
+
+    <div class="relative">
+      <div class="hidden lg:block absolute top-10 left-0 w-full h-0.75 bg-slate-200 z-0"></div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 relative z-10">
+        {steps.map((item) => (
+          <div class="flex flex-col items-start">
+            <div class="text-6xl font-extrabold text-accent/30 mb-6 select-none bg-background pr-4 inline-block transition-colors hover:text-accent/50">
+              {item.step}
+            </div>
+            
+            <h3 class="text-xl font-bold text-foreground mb-3">
+              {item.title}
+            </h3>
+            <p class="text-sm text-muted-foreground leading-relaxed">
+              {item.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,134 @@
+---
+// src/components/home/Services.astro
+const { isEn } = Astro.props;
+
+const content = {
+  title: isEn ? "Services Overview" : "Layanan Kami",
+  subtitle: isEn 
+    ? "Comprehensive IT support services tailored for your business needs." 
+    : "Layanan IT support lengkap yang disesuaikan dengan kebutuhan bisnis Anda.",
+  viewAll: isEn ? "View All Services" : "Lihat Semua Layanan",
+};
+
+const services = [
+  {
+    icon: "server",
+    title: isEn ? "Server & Cloud" : "Server & Cloud",
+    description: isEn 
+      ? "Server setup, maintenance, and cloud infrastructure management." 
+      : "Pengaturan server, pemeliharaan, dan manajemen infrastruktur cloud.",
+  },
+  {
+    icon: "network",
+    title: isEn ? "Network & Infrastructure" : "Jaringan & Infrastruktur",
+    description: isEn 
+      ? "Network design, configuration, and troubleshooting." 
+      : "Desain jaringan, konfigurasi, dan perbaikan masalah koneksi.",
+  },
+  {
+    icon: "shield",
+    title: isEn ? "IT Security" : "Keamanan IT",
+    description: isEn 
+      ? "Security audits, firewall configuration, and threat protection." 
+      : "Audit keamanan, konfigurasi firewall, dan perlindungan ancaman.",
+  },
+  {
+    icon: "camera",
+    title: isEn ? "CCTV & Physical Security" : "CCTV & Keamanan Fisik",
+    description: isEn 
+      ? "Surveillance system installation and maintenance." 
+      : "Instalasi dan pemeliharaan sistem kamera pengawas.",
+  },
+  {
+    icon: "wrench",
+    title: isEn ? "On-Demand Support" : "Dukungan On-Demand",
+    description: isEn 
+      ? "Flexible IT support when you need it, as you need it." 
+      : "Dukungan IT fleksibel kapan pun dan sesuai kebutuhan Anda.",
+  },
+  {
+  icon: "network", // Sementara pakai icon yang ada atau nanti kita tambah SVG baru
+  title: isEn ? "Web Development" : "Pengembangan Website",
+  description: isEn 
+    ? "Building professional and responsive websites for your business." 
+    : "Membangun website profesional dan responsif untuk bisnis Anda.",
+},
+];
+
+// Map icon names to SVG paths
+const icons: { [key: string]: string } = {
+  server: '<path d="M20 10V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v6"/><path d="M20 20v-6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v6"/><path d="M4 10h16"/><path d="M4 20h16"/><path d="M8 6h.01"/><path d="M8 16h.01"/>',
+  network: '<rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/>',
+  shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>',
+  camera: '<rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>',
+  wrench: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>'
+};
+---
+
+<section class="section-padding bg-background">
+  <div class="container-custom">
+    <div class="text-center mb-12 reveal">
+      <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4">
+        {content.title}
+      </h2>
+      <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+        {content.subtitle}
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+      {services.map((service, index) => (
+        <div 
+          class="p-6 bg-card rounded-xl border border-border hover:border-accent/50 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300 group reveal"
+          style={`transition-delay: ${index * 100}ms`}
+        >
+          <div class="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="24" height="24" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              class="text-accent"
+              set:html={icons[service.icon]}
+            />
+          </div>
+          <h3 class="text-lg font-semibold text-foreground mb-2 group-hover:text-accent transition-colors">
+            {service.title}
+          </h3>
+          <p class="text-sm text-muted-foreground leading-relaxed">
+            {service.description}
+          </p>
+        </div>
+      ))}
+    </div>
+
+    <div class="text-center reveal">
+      <a 
+        href={isEn ? "/en/services" : "/id/services"}
+        class="inline-flex items-center justify-center rounded-md border border-input bg-background px-8 py-3 text-sm font-medium hover:bg-accent hover:text-white hover:border-accent transition-all duration-300"
+      >
+        {content.viewAll}
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

@@ -1,7 +1,81 @@
 @import "tailwindcss";
-@plugin "@tailwindcss/typography"; /* Tambahkan baris ini */
 
-/* Anda bisa menambahkan font atau custom theme di bawah sini jika perlu */
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  /* Font Family */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  /* Konversi Warna HSL dari Lovable ke Tailwind v4 */
+  --color-background: hsl(0 0% 100%);
+  --color-foreground: hsl(215 25% 17%);
+
+  --color-primary: hsl(215 25% 17%);
+  --color-primary-foreground: hsl(0 0% 100%);
+
+  --color-secondary: hsl(210 20% 96%);
+  --color-secondary-foreground: hsl(215 25% 17%);
+
+  --color-accent: hsl(174 62% 40%); /* Warna Teal di Logo/Tombol */
+  --color-accent-foreground: hsl(0 0% 100%);
+
+  --color-muted: hsl(210 20% 96%);
+  --color-muted-foreground: hsl(215 14% 45%);
+
+  --color-border: hsl(214 20% 90%);
+  --color-input: hsl(214 20% 90%);
+  --ring: hsl(174 62% 40%);
+
+  --radius-lg: 0.5rem;
+}
+
+/* Base Styles */
+@layer base {
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+}
+
+/* Custom Utilities (Lego Parts) */
+@utility container-custom {
+  @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+@utility section-padding {
+  @apply py-16 md:py-24;
+}
+
+/* CSS Counter untuk Penomoran TOC Otomatis */
+.prose {
+  counter-reset: h2-counter;
+}
+
+.prose h2 {
+  counter-reset: h3-counter;
+  counter-increment: h2-counter;
+}
+
+.prose h2::before {
+  content: counter(h2-counter) ". ";
+  @apply text-accent mr-2;
+}
+
+.prose h3 {
+  counter-increment: h3-counter;
+}
+
+.prose h3::before {
+  content: counter(h2-counter) "." counter(h3-counter) " ";
+  @apply text-accent/70 mr-2 text-sm;
 }

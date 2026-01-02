@@ -1,0 +1,13 @@
+---
+// src/pages/en/services.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ServicesDetail from '../../components/ServicesDetail.astro';
+import CTA from '../../components/home/CTA.astro';
+
+const isEn = true; // Set ke true untuk Bahasa Inggris
+---
+
+<BaseLayout title="Professional IT Services | DoWithSudo" isEn={isEn}>
+  <ServicesDetail isEn={isEn} />
+  <CTA isEn={isEn} />
+</BaseLayout>

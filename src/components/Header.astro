@@ -1,0 +1,106 @@
+---
+// src/components/Header.astro
+const { isEn, alternatePath, currentPath } = Astro.props;
+
+const navLinks = [
+  { name: isEn ? "Home" : "Beranda", path: isEn ? "/en/" : "/id/" },
+  { name: "Services", path: isEn ? "/en/services/" : "/id/services/" },
+  { name: "Blog", path: isEn ? "/en/blog/" : "/id/blog/" },
+  { name: "About", path: isEn ? "/en/about/" : "/id/about/" },
+];
+
+const isActive = (path: string) => {
+  if (path === '/id/' || path === '/en/') {
+    return currentPath === path;
+  }
+  return currentPath.startsWith(path);
+};
+---
+
+<header class="sticky top-0 z-50 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80 border-b border-border">
+  <nav class="container-custom">
+    <div class="flex h-16 items-center justify-between">
+      <a href={isEn ? "/en/" : "/id/"} class="flex items-center gap-2 transition-transform hover:scale-105">
+        <span class="text-xl font-bold text-foreground">
+          >_Do<span class="text-accent">WithSudo</span>
+        </span>
+      </a>
+
+      <div class="hidden md:flex items-center gap-8">
+        {navLinks.map((link) => (
+          <a
+            href={link.path}
+            class={`text-sm font-medium transition-colors hover:text-accent ${
+              isActive(link.path) ? "text-accent" : "text-muted-foreground"
+            }`}
+          >
+            {link.name}
+          </a>
+        ))}
+      </div>
+
+      <div class="hidden md:flex items-center gap-4">
+        <a 
+          href={alternatePath}
+          class="text-xs font-bold px-3 py-1.5 rounded-full border border-border bg-secondary hover:bg-accent hover:text-white transition-all"
+        >
+          {isEn ? "🇮🇩 ID" : "🇺🇸 EN"}
+        </a>
+
+        <a 
+          href={isEn ? "/en/contact" : "/id/contact"} 
+          class="inline-flex items-center justify-center rounded-md bg-accent px-4 py-2 text-sm font-medium text-accent-foreground hover:bg-accent/90 transition-colors"
+        >
+          {isEn ? "Get a Quote" : "Hubungi Kami"}
+        </a>
+      </div>
+
+      <button
+        id="menu-toggle"
+        class="md:hidden p-2 -mr-2 text-foreground"
+        aria-label="Toggle menu"
+      >
+        <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="12"/></svg>
+        <svg id="close-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+
+    <div id="mobile-menu" class="hidden md:hidden border-t border-border">
+      <div class="py-4 space-y-1">
+        {navLinks.map((link) => (
+          <a
+            href={link.path}
+            class={`block py-3 px-2 text-base font-medium rounded-md transition-colors ${
+              isActive(link.path)
+                ? "text-accent bg-secondary"
+                : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+            }`}
+          >
+            {link.name}
+          </a>
+        ))}
+        <div class="pt-4 pb-2 px-2 flex flex-col gap-3">
+            <a href={alternatePath} class="text-center py-2 border border-border rounded-md font-medium">
+                Switch to {isEn ? "Bahasa Indonesia" : "English"}
+            </a>
+            <a href={isEn ? "/en/contact" : "/id/contact"} class="w-full text-center bg-accent py-3 rounded-md text-accent-foreground font-medium">
+                {isEn ? "Get a Quote" : "Hubungi Kami"}
+            </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const btn = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const menuIcon = document.getElementById('menu-icon');
+  const closeIcon = document.getElementById('close-icon');
+
+  btn?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
+    menuIcon?.classList.toggle('hidden');
+    closeIcon?.classList.toggle('hidden');
+  });
+</script>

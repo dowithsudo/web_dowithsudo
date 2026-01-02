@@ -1,0 +1,164 @@
+---
+// src/components/ServicesDetail.astro
+const { isEn } = Astro.props;
+
+const services = [
+  {
+    title: isEn ? "Server & Cloud Management" : "Manajemen Server & Cloud",
+    description: isEn ? "Complete server and cloud infrastructure solutions for your business." : "Solusi infrastruktur server dan cloud lengkap untuk bisnis Anda.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></svg>`,
+    features: isEn 
+      ? ["Server installation and configuration", "Cloud migration (AWS, Azure, GCP)", "Backup and disaster recovery", "Performance monitoring", "Virtual machine management"] 
+      : ["Instalasi dan konfigurasi server", "Migrasi cloud (AWS, Azure, GCP)", "Backup dan pemulihan bencana", "Monitoring performa", "Manajemen virtual machine"],
+  },
+  {
+    title: isEn ? "Network & Infrastructure" : "Jaringan & Infrastruktur",
+    description: isEn ? "Design, deploy, and maintain reliable network infrastructure." : "Desain, implementasi, dan pemeliharaan infrastruktur jaringan yang andal.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v3"/><path d="M12 11V8"/></svg>`,
+    features: isEn 
+      ? ["Network design and planning", "Router and switch configuration", "WiFi setup and optimization", "VPN and remote access solutions", "Network troubleshooting"] 
+      : ["Desain dan perencanaan jaringan", "Konfigurasi router dan switch", "Setup dan optimasi WiFi", "Solusi VPN", "Troubleshooting jaringan"],
+  },
+  {
+    title: isEn ? "IT Security" : "Keamanan IT",
+    description: isEn ? "Protect your business from cyber threats with comprehensive security solutions." : "Lindungi bisnis Anda dari ancaman siber dengan solusi keamanan komprehensif.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>`,
+    features: isEn 
+      ? ["Security assessments and audits", "Firewall configuration", "Antivirus and malware protection", "Employee security training", "Incident response planning"] 
+      : ["Asesmen dan audit keamanan", "Konfigurasi firewall", "Proteksi antivirus dan malware", "Pelatihan keamanan karyawan", "Perencanaan respon insiden"],
+  },
+  {
+    title: isEn ? "CCTV & Physical Security" : "CCTV & Keamanan Fisik",
+    description: isEn ? "Surveillance and physical security system installation and maintenance." : "Instalasi dan pemeliharaan sistem surveilans dan keamanan fisik.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>`,
+    features: isEn 
+      ? ["CCTV system design and installation", "IP camera setup", "Access control systems", "Video storage solutions", "Remote monitoring setup"] 
+      : ["Desain sistem CCTV", "Setup kamera IP", "Sistem kontrol akses", "Solusi penyimpanan video", "Pengaturan monitoring jarak jauh"],
+  },
+  {
+    title: isEn ? "On-Demand IT Support" : "Dukungan IT On-Demand",
+    description: isEn ? "Flexible technical support for when you need it most." : "Dukungan teknis fleksibel saat Anda sangat membutuhkannya.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`,
+    features: isEn 
+      ? ["Remote troubleshooting", "On-site support visits", "Hardware and software issues", "Email and productivity tools", "General IT consultation"] 
+      : ["Troubleshooting jarak jauh", "Kunjungan dukungan lokasi", "Masalah hardware & software", "Alat produktivitas", "Konsultasi IT umum"],
+  },
+  {
+    title: isEn ? "IT Consultation & Strategy" : "Konsultasi & Strategi IT",
+    description: isEn ? "Expert advice to align your technology with your business goals." : "Saran ahli untuk menyelaraskan teknologi dengan tujuan bisnis Anda.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A5 5 0 0 0 8 8c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>`,
+    features: isEn 
+      ? ["Digital transformation roadmap", "Budget planning & optimization", "Technology stack selection", "IT policy development", "Vendor management"] 
+      : ["Peta jalan transformasi digital", "Perencanaan & optimasi anggaran", "Pemilihan teknologi (Tech Stack)", "Pengembangan kebijakan IT", "Manajemen vendor"],
+  }
+];
+
+const workflowSteps = [
+  { step: "01", title: isEn ? "Initial Contact" : "Kontak Awal", desc: isEn ? "Reach out via phone, email, or contact form." : "Hubungi melalui telepon, email, atau formulir." },
+  { step: "02", title: isEn ? "Assessment & Discovery" : "Asesmen & Observasi", desc: isEn ? "I'll analyze your current setup and understand your needs." : "Saya akan menganalisa setup dan memahami kebutuhan Anda." },
+  { step: "03", title: isEn ? "Proposal & Agreement" : "Proposal & Kesepakatan", desc: isEn ? "Receive a clear proposal with scope, timeline, and pricing." : "Terima proposal jelas dengan cakupan, waktu, dan harga." },
+  { step: "04", title: isEn ? "Implementation" : "Implementasi", desc: isEn ? "Work begins with regular updates. On-site or remote." : "Pekerjaan dimulai dengan update rutin, lokasi atau remote." },
+  { step: "05", title: isEn ? "Testing & Handover" : "Pengujian & Serah Terima", desc: isEn ? "Thorough testing, documentation, and knowledge transfer." : "Pengujian menyeluruh, dokumentasi, dan serah terima." },
+  { step: "06", title: isEn ? "Ongoing Support" : "Dukungan Berkelanjutan", desc: isEn ? "Post-implementation support and optional maintenance." : "Dukungan pasca-pengerjaan dan pemeliharaan opsional." },
+];
+
+const serviceModels = [
+  { title: "On-Demand", desc: isEn ? "Pay only when you need support." : "Bayar hanya saat butuh dukungan.", feats: isEn ? ["No contracts", "Flexible scheduling", "Hourly billing"] : ["Tanpa kontrak", "Jadwal fleksibel", "Tagihan per jam"] },
+  { title: "Monthly Retainer", desc: isEn ? "Regular support with priority service." : "Dukungan rutin dengan layanan prioritas.", feats: isEn ? ["Fixed monthly fee", "Priority support", "Regular maintenance"] : ["Biaya bulanan tetap", "Dukungan prioritas", "Pemeliharaan rutin"] },
+  { title: "Project-Based", desc: isEn ? "Fixed scope and pricing for specific projects." : "Cakupan dan harga tetap untuk proyek spesifik.", feats: isEn ? ["Clear deliverables", "Fixed pricing", "Defined timeline"] : ["Hasil kerja jelas", "Harga tetap", "Timeline pasti"] },
+];
+---
+
+<section class="py-20 bg-slate-50">
+  <div class="container-custom">
+    <div class="max-w-3xl">
+      <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">
+        {isEn ? "IT Services" : "Layanan IT"}
+      </h1>
+      <p class="text-lg text-slate-600 leading-relaxed">
+        {isEn 
+          ? "Comprehensive IT support services tailored for UMKM and small businesses. From server management to security, I've got you covered."
+          : "Layanan dukungan IT komprehensif yang dirancang khusus untuk UMKM dan bisnis kecil. Dari manajemen server hingga keamanan, saya siap membantu Anda."}
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section-padding bg-white">
+  <div class="container-custom">
+    <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-10">{isEn ? "What I Offer" : "Apa yang Saya Tawarkan"}</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {services.map((s) => (
+        <div class="p-6 bg-white rounded-xl border border-slate-200 shadow-sm hover:border-accent/50 transition-all group">
+          <div class="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-6 text-accent">
+            <Fragment set:html={s.icon} />
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-accent transition-colors">{s.title}</h3>
+          <p class="text-sm text-slate-500 mb-6 leading-relaxed">{s.description}</p>
+          <ul class="space-y-3">
+            {s.features.map((f) => (
+              <li class="text-sm text-slate-600 flex items-start gap-3">
+                <span class="text-accent font-bold mt-0.5">•</span>
+                {f}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="section-padding bg-[#1a1f2c] text-white">
+  <div class="container-custom">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl font-bold mb-4">{isEn ? "How We Work Together" : "Cara Kami Bekerja Sama"}</h2>
+      <p class="text-slate-400 max-w-2xl mx-auto leading-relaxed">
+        {isEn ? "A clear, structured approach to ensure your IT project is delivered successfully." : "Pendekatan terstruktur untuk memastikan proyek IT Anda berhasil."}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {workflowSteps.map((w) => (
+        <div class="p-6 bg-[#222939] rounded-xl border border-slate-700 flex flex-col gap-4">
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <span class="text-xs font-bold text-accent uppercase tracking-widest">Step {w.step}</span>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold mb-2">{w.title}</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">{w.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="section-padding bg-slate-50">
+  <div class="container-custom text-center mb-16">
+    <h2 class="text-3xl font-bold text-slate-900 mb-4">{isEn ? "Flexible Service Models" : "Model Layanan Fleksibel"}</h2>
+    <p class="text-slate-500 max-w-2xl mx-auto">
+        {isEn ? "Choose the engagement model that works best for your needs and budget." : "Pilih model kerjasama yang paling sesuai dengan kebutuhan dan anggaran Anda."}
+    </p>
+  </div>
+  <div class="container-custom grid grid-cols-1 md:grid-cols-3 gap-8">
+    {serviceModels.map((m) => (
+      <div class="p-8 bg-white border border-slate-200 rounded-2xl text-center shadow-sm">
+        <div class="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-6 text-accent">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+        </div>
+        <h3 class="text-xl font-bold text-slate-900 mb-2">{m.title}</h3>
+        <p class="text-sm text-slate-500 mb-6 leading-relaxed">{m.desc}</p>
+        <ul class="space-y-2 border-t pt-6 border-slate-100">
+          {m.feats.map(f => (
+            <li class="text-sm text-slate-600 font-medium">{f}</li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+</section>

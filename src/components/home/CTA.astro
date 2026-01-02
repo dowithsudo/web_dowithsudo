@@ -1,0 +1,45 @@
+---
+// src/components/home/CTA.astro
+const { isEn } = Astro.props;
+
+const content = {
+  title: isEn ? "Ready to Solve Your IT Challenges?" : "Siap Menyelesaikan Tantangan IT Anda?",
+  subtitle: isEn 
+    ? "Get in touch today for a free consultation. Let's discuss how I can help your business run smoothly." 
+    : "Hubungi hari ini untuk konsultasi gratis. Mari diskusikan bagaimana saya bisa membantu bisnis Anda berjalan lancar.",
+  button: isEn ? "Contact Me Now" : "Hubungi Saya Sekarang",
+};
+---
+
+<section class="section-padding bg-accent text-accent-foreground">
+  <div class="container-custom">
+    <div class="text-center">
+      <h2 class="text-3xl md:text-5xl font-bold mb-6">
+        {content.title}
+      </h2>
+      <p class="text-lg text-accent-foreground/90 max-w-2xl mx-auto mb-10 leading-relaxed">
+        {content.subtitle}
+      </p>
+      
+      <a 
+        href={isEn ? "/en/contact" : "/id/contact"} 
+        class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold transition-all duration-300 rounded-lg bg-background text-foreground hover:bg-background/90 hover:scale-105 shadow-lg group"
+      >
+        {content.button}
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          width="20" height="20" 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          stroke="currentColor" 
+          stroke-width="2" 
+          stroke-linecap="round" 
+          stroke-linejoin="round" 
+          class="ml-2 transition-transform duration-300 group-hover:translate-x-1"
+        >
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

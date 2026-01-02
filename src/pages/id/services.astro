@@ -1,0 +1,14 @@
+---
+// src/pages/id/services.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ServicesDetail from '../../components/ServicesDetail.astro';
+import CTA from '../../components/home/CTA.astro';
+
+const isEn = false;
+---
+
+<BaseLayout title="Layanan IT Profesional | DoWithSudo" isEn={isEn}>
+  <ServicesDetail isEn={isEn} />
+  
+  <CTA isEn={isEn} />
+</BaseLayout>

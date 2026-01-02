@@ -1,0 +1,84 @@
+---
+// src/components/home/Problems.astro
+const { isEn } = Astro.props;
+
+const content = {
+  title: isEn ? "Sound Familiar?" : "Masalah Yang Sering Muncul?",
+  subtitle: isEn 
+    ? "Many businesses face these IT challenges daily. You're not alone." 
+    : "Banyak bisnis menghadapi tantangan IT ini setiap hari. Anda tidak sendirian.",
+};
+
+const problems = [
+  {
+    icon: "alert",
+    title: isEn ? "System Downtime" : "Sistem Sering Down",
+    description: isEn 
+      ? "Server crashes and network failures disrupting your business operations." 
+      : "Server mati mendadak dan kegagalan jaringan yang mengganggu operasional bisnis.",
+  },
+  {
+    icon: "help",
+    title: isEn ? "No IT Expertise" : "Tidak Ada Ahli IT",
+    description: isEn 
+      ? "Lacking in-house IT staff to handle technical challenges and maintenance." 
+      : "Kurangnya staf IT internal untuk menangani tantangan teknis dan pemeliharaan.",
+  },
+  {
+    icon: "dollar",
+    title: isEn ? "High IT Costs" : "Biaya IT Tinggi",
+    description: isEn 
+      ? "Full-time IT hires are expensive for small businesses and UMKM." 
+      : "Mempekerjakan staf IT tetap sangat mahal bagi bisnis kecil dan UMKM.",
+  },
+  {
+    icon: "clock",
+    title: isEn ? "Slow Response" : "Respon Lambat",
+    description: isEn 
+      ? "Waiting days for IT vendors to respond to critical issues." 
+      : "Menunggu berhari-hari hanya untuk respon vendor IT saat ada masalah kritis.",
+  },
+];
+
+const icons: { [key: string]: string } = {
+  alert: '<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
+  help: '<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
+  dollar: '<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>',
+  clock: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>'
+};
+---
+
+<section class="section-padding bg-background">
+  <div class="container-custom">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-5xl font-bold text-foreground mb-4">
+        {content.title}
+      </h2>
+      <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+        {content.subtitle}
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {problems.map((problem) => (
+        <div class="p-8 bg-card rounded-xl border border-border/50 shadow-sm flex flex-col items-start">
+          <div class="w-12 h-12 rounded-lg bg-red-50 flex items-center justify-center mb-6">
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="24" height="24" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="red" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round"
+              set:html={icons[problem.icon]}
+            />
+          </div>
+          <h3 class="text-xl font-bold text-foreground mb-3">{problem.title}</h3>
+          <p class="text-muted-foreground text-sm leading-relaxed">{problem.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

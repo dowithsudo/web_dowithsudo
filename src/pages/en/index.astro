@@ -1,10 +1,25 @@
 ---
-import BaseLayout from '@/layouts/BaseLayout.astro';
+// src/pages/en/index.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/home/Hero.astro';
+import Problems from '../../components/home/Problems.astro';
+import Solutions from '../../components/home/Solutions.astro';
+import Services from '../../components/home/Services.astro';
+import WhyChooseMe from '../../components/home/WhyChooseMe.astro';
+import HowItWorks from '../../components/home/HowItWorks.astro';
+import CTA from '../../components/home/CTA.astro';
+
+// Set true untuk mengaktifkan konten Bahasa Inggris di semua komponen
+const isEn = true;
 ---
-<BaseLayout title="Home">
-  <h1>This is the main page in English.</h1>
-  <div class="links">
-    <a href="/en/blog/">Read Blog</a> | 
-    <a href="/id/">Versi Indonesia</a>
-  </div>
+
+<BaseLayout title="Trusted IT Partner | DoWithSudo" isEn={isEn}>
+  <Hero isEn={isEn} />
+  <Problems isEn={isEn} />
+  <Solutions isEn={isEn} />
+  <Services isEn={isEn} />
+  <WhyChooseMe isEn={isEn} />
+  <HowItWorks isEn={isEn} />
+  
+  <CTA isEn={isEn} />
 </BaseLayout>

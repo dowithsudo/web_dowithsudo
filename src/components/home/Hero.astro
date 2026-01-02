@@ -1,0 +1,81 @@
+---
+// src/components/Hero.astro
+const { isEn } = Astro.props;
+
+const content = {
+  tag: isEn ? "Freelance IT Support Professional" : "Profesional IT Support Freelance",
+  title: isEn ? "Your Reliable IT Partner for" : "Partner IT Terpercaya untuk",
+  titleAccent: isEn ? "Business Growth" : "Pertumbuhan Bisnis",
+  description: isEn 
+    ? "Professional IT support services for UMKM and small businesses. Server management, network infrastructure, security, and on-demand technical support."
+    : "Layanan IT support profesional untuk UMKM dan bisnis kecil. Manajemen server, infrastruktur jaringan, keamanan, dan bantuan teknis on-demand.",
+  primaryBtn: isEn ? "Free Consultation" : "Konsultasi Gratis",
+  secondaryBtn: isEn ? "View Services" : "Lihat Layanan",
+  features: isEn 
+    ? ["On-Demand Support", "Flexible Pricing", "Quick Response"]
+    : ["Dukungan On-Demand", "Harga Fleksibel", "Respon Cepat"]
+};
+---
+
+<section class="section-padding bg-linear-to-b from-secondary to-background overflow-hidden">
+  <div class="container-custom">
+    <div class="max-w-3xl mx-auto text-center">
+      <div class="animate-fade-in-up">
+        <span class="inline-block px-4 py-1.5 mb-6 text-sm font-medium text-accent bg-accent/10 rounded-full">
+          {content.tag}
+        </span>
+      </div>
+
+      <h1 class="animate-fade-in-up [animation-delay:200ms] text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 text-balance">
+        {content.title} <span class="text-accent">{content.titleAccent}</span>
+      </h1>
+
+      <p class="animate-fade-in-up [animation-delay:400ms] text-lg md:text-xl text-muted-foreground mb-8 text-balance">
+        {content.description}
+      </p>
+
+      <div class="animate-fade-in-up [animation-delay:600ms] flex flex-col sm:flex-row gap-4 justify-center">
+        <a 
+          href={isEn ? "/en/contact" : "/id/contact"} 
+          class="inline-flex items-center justify-center rounded-md bg-accent px-8 py-3 text-base font-medium text-accent-foreground hover:bg-accent/90 transition-all hover:scale-105"
+        >
+          {content.primaryBtn}
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 h-4 w-4"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+        <a 
+          href={isEn ? "/en/services" : "/id/services"} 
+          class="inline-flex items-center justify-center rounded-md border border-input bg-background px-8 py-3 text-base font-medium hover:bg-accent hover:text-white transition-all"
+        >
+          {content.secondaryBtn}
+        </a>
+      </div>
+
+      <div class="animate-fade-in-up [animation-delay:800ms] flex flex-wrap justify-center gap-6 mt-12">
+        {content.features.map((item) => (
+          <div class="flex items-center gap-2 text-sm text-muted-foreground">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+            <span>{item}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+  }
+</style>

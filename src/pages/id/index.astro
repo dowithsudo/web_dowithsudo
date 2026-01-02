@@ -1,8 +1,23 @@
 ---
-import BaseLayout from '@/layouts/BaseLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/home/Hero.astro';
+import Problems from '../../components/home/Problems.astro';
+import Solutions from '../../components/home/Solutions.astro';
+import Services from '../../components/home/Services.astro';
+import WhyChooseMe from '../../components/home/WhyChooseMe.astro';
+import HowItWorks from '../../components/home/HowItWorks.astro';
+import CTA from '../../components/home/CTA.astro'; // Impor CTA
+
+const isEn = false;
 ---
-<BaseLayout title="Beranda">
-  <h1>Selamat Datang di halaman utama indonesia</h1>
-  <a href="/id/blog">Buka blog</a>
-  <a href="/en/blog/">Versi Inggris</a> 
+
+<BaseLayout title="Partner IT Terpercaya | DoWithSudo">
+  <Hero isEn={isEn} />
+  <Problems isEn={isEn} />
+  <Solutions isEn={isEn} />
+  <Services isEn={isEn} />
+  <WhyChooseMe isEn={isEn} />
+  <HowItWorks isEn={isEn} />
+  
+  <CTA isEn={isEn} />
 </BaseLayout>

@@ -1,36 +1,35 @@
 ---
 // src/pages/index.astro
-// Halaman ini tidak me-render HTML, hanya sebagai "traffic controller"
+// Halaman ini hanya untuk redirect, tidak perlu impor Layout atau Hero!
 ---
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta http-equiv="refresh" content="0;url=/id/" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DoWithSudo | Connecting...</title>
+    <meta http-equiv="refresh" content="2;url=/id/" />
     
     <script is:inline>
-      // 1. Cek apakah user pernah memilih bahasa secara manual sebelumnya (opsional, via localStorage)
       const savedLang = localStorage.getItem('preferred-lang');
-      
-      // 2. Jika tidak ada, cek bahasa browser (contoh: "en-US" atau "id-ID")
       const browserLang = navigator.language.toLowerCase();
+      let targetLang = 'id'; 
       
-      // 3. Tentukan tujuan
-      let targetLang = 'id'; // Default
-      
-      if (savedLang) {
+      if (savedLang === 'en' || savedLang === 'id') {
         targetLang = savedLang;
       } else if (browserLang.startsWith('en')) {
         targetLang = 'en';
       }
       
-      // 4. Eksekusi pengalihan
-      window.location.pathname = `/${targetLang}/`;
+      window.location.replace(`/${targetLang}/`);
     </script>
   </head>
-  <body style="background: #0f172a;">
-    <div style="font-family: sans-serif; color: white; display: flex; justify-content: center; align-items: center; height: 100vh;">
-      <p>Redirecting...</p>
+  <body style="background: hsl(215 25% 10%); margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: sans-serif;">
+    <div style="text-align: center;">
+      <div style="width: 40px; height: 40px; border: 3px solid hsl(174 62% 40% / 0.2); border-top: 3px solid hsl(174 62% 40%); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 20px;"></div>
+      <p style="color: white; font-size: 14px; letter-spacing: 0.05em; opacity: 0.8;">REDIRECTING...</p>
     </div>
+    <style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
   </body>
 </html>

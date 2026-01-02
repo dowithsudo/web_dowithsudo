@@ -1,6 +1,8 @@
 ---
 // src/layouts/BaseLayout.astro
 import { getCollection } from 'astro:content';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro'; // Impor Footer baru
 import '../styles/global.css';
 
 const { title = "DoWithSudo", reference } = Astro.props;
@@ -11,7 +13,7 @@ const siteUrl = Astro.site || 'https://dowithsudo.com';
 
 const isEn = pathname.startsWith('/en');
 
-// --- LOGIKA SMART SWITCHER (Pencarian Pasangan Artikel) ---
+// --- LOGIKA SMART SWITCHER ---
 let alternatePath = isEn ? '/id/' : '/en/';
 if (reference) {
   const allPosts = await getCollection('blog');
@@ -20,7 +22,6 @@ if (reference) {
     (isEn ? p.id.startsWith('id/') : p.id.startsWith('en/'))
   );
   if (partner) {
-    // Menangani slug baik dari folder bundle maupun file .md
     const partnerSlug = partner.id
       .split('/').pop()?.replace(/\/index\.(md|mdx)$/, '').replace(/\.(md|mdx)$/, '');
     alternatePath = isEn ? `/id/blog/${partnerSlug}` : `/en/blog/${partnerSlug}`;
@@ -52,55 +53,27 @@ const enUrl = new URL(isEn ? pathname : alternatePath, siteUrl);
     <link rel="alternate" hreflang="x-default" href={idUrl} />
   </head>
   
-  <body class="bg-slate-50 text-slate-900 antialiased min-h-screen flex flex-col">
-    <header class="sticky top-0 z-40 w-full backdrop-blur-md bg-white/75 border-b border-slate-200">
-      <nav class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
-        <div class="flex gap-6 items-center">
-          <a href={isEn ? '/en/' : '/id/'} class="text-xl font-black tracking-tighter hover:text-blue-600 transition-colors">
-            <span class="text-blue-600">>_</span>DoWithSudo
-          </a>
-          <a href={isEn ? '/en/blog/' : '/id/blog/'} class="text-sm font-medium hover:text-blue-600 transition-colors">
-            Blog
-          </a>
-        </div>
+  <body class="bg-background text-foreground antialiased min-h-screen flex flex-col">
+    <Header 
+      isEn={isEn} 
+      alternatePath={alternatePath} 
+      currentPath={pathname} 
+    />
 
-        <div class="flex items-center gap-4">
-          <a 
-            href={alternatePath} 
-            id="lang-switcher"
-            data-target-lang={isEn ? 'id' : 'en'}
-            class="text-xs font-bold px-3 py-1.5 rounded-full border border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 transition-all flex items-center gap-2"
-          >
-            {isEn ? (
-              <><span>🇮🇩</span> <span class="hidden sm:inline">Bahasa Indonesia</span><span class="sm:hidden">ID</span></>
-            ) : (
-              <><span>🇺🇸</span> <span class="hidden sm:inline">English</span><span class="sm:hidden">EN</span></>
-            )}
-          </a>
-        </div>
-      </nav>
-    </header>
-
-    <main class="grow max-w-4xl w-full mx-auto px-4 py-12">
+    <main class="grow">
       <slot />
     </main>
 
-    <footer class="border-t border-slate-200 py-8 bg-white mt-auto">
-      <div class="max-w-4xl mx-auto px-4 text-center text-slate-500 text-sm">
-        <p>&copy; {new Date().getFullYear()} DoWithSudo. Built with Astro & Tailwind v4.</p>
-      </div>
-    </footer>
+    <Footer isEn={isEn} />
 
     <script is:inline>
-      // Ambil elemen switcher
-      const switcher = document.getElementById('lang-switcher');
-      if (switcher) {
-        switcher.addEventListener('click', () => {
+      document.addEventListener('click', (e) => {
+        const switcher = e.target.closest('#lang-switcher');
+        if (switcher) {
           const lang = switcher.getAttribute('data-target-lang');
-          // Simpan preferensi bahasa ke localStorage
           localStorage.setItem('preferred-lang', lang);
-        });
-      }
+        }
+      });
     </script>
   </body>
 </html>
