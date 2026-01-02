@@ -2,7 +2,7 @@
 // src/layouts/BaseLayout.astro
 import { getCollection } from 'astro:content';
 import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro'; // Impor Footer baru
+import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
 const { title = "DoWithSudo", reference } = Astro.props;
@@ -13,12 +13,15 @@ const siteUrl = Astro.site || 'https://dowithsudo.com';
 
 const isEn = pathname.startsWith('/en');
 
+// --- METADATA DINAMIS ---
+const description = isEn 
+  ? "Expert Enterprise IT Infrastructure & System Administration services with 14+ years of experience." 
+  : "Layanan Infrastruktur IT Enterprise & Administrasi Sistem berpengalaman lebih dari 14 tahun.";
+
 // --- LOGIKA SMART SWITCHER ---
-// --- LOGIKA SMART SWITCHER (VERSI FIX) ---
 let alternatePath = isEn ? '/id/' : '/en/';
 
 if (reference) {
-  // ... (logika blog partner tetap sama)
   const allPosts = await getCollection('blog');
   const partner = allPosts.find(p => 
     p.data.reference === reference && 
@@ -31,11 +34,10 @@ if (reference) {
     alternatePath = isEn ? '/id/blog/' : '/en/blog/';
   }
 } else {
-  // LOGIKA DINAMIS UNTUK HALAMAN STATIS (About, Services, Contact)
   if (isEn) {
-    alternatePath = pathname.replace('/en/', '/id/');
+    alternatePath = pathname.replace('/en/', '/id/') || '/id/';
   } else {
-    alternatePath = pathname.replace('/id/', '/en/');
+    alternatePath = pathname.replace('/id/', '/en/') || '/en/';
   }
 }
 
@@ -44,17 +46,23 @@ const idUrl = new URL(isEn ? alternatePath : pathname, siteUrl);
 const enUrl = new URL(isEn ? pathname : alternatePath, siteUrl);
 ---
 
+<!DOCTYPE html>
 <html lang={isEn ? 'en' : 'id'} class="scroll-smooth">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    
     <title>{title} | DoWithSudo</title>
-
+    <meta name="description" content={description} />
     <link rel="canonical" href={currentUrl} />
+
     <link rel="alternate" hreflang="id" href={idUrl} />
     <link rel="alternate" hreflang="en" href={enUrl} />
     <link rel="alternate" hreflang="x-default" href={idUrl} />
+
+    <meta name="generator" content={Astro.generator} />
   </head>
   
   <body class="bg-background text-foreground antialiased min-h-screen flex flex-col">
@@ -71,6 +79,7 @@ const enUrl = new URL(isEn ? pathname : alternatePath, siteUrl);
     <Footer isEn={isEn} />
 
     <script is:inline>
+      // Simpan preferensi bahasa saat switcher diklik
       document.addEventListener('click', (e) => {
         const switcher = e.target.closest('#lang-switcher');
         if (switcher) {

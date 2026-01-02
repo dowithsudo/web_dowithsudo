@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Ganti dengan domain asli kamu nanti
+Sitemap: https://dowithsudo.com/sitemap-index.xml
