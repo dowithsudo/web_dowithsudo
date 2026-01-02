@@ -1,0 +1,46 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+// 1. Beritahu Astro slug apa saja yang tersedia di folder 'id'
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ id }) => id.startsWith('id/'));
+  
+  return posts.map(post => ({
+    // Mengambil nama file sebagai slug URL
+    params: { slug: post.id.split('/').pop()?.split('.')[0] },
+    props: { post },
+  }));
+}
+
+// 2. Ambil data post dari props
+const { post } = Astro.props;
+
+// 3. Render konten markdown menjadi komponen HTML
+const { Content } = await render(post);
+---
+
+<BaseLayout title={post.data.title} reference={post.data.reference}>
+  <article>
+    <h1>{post.data.title}</h1>
+    <p>Dipublikasikan pada: {post.data.date.toLocaleDateString('id-ID', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    })}</p>
+    <hr />
+    <Content />
+  </article>
+</BaseLayout>
+
+<style>
+  article {
+    line-height: 1.6;
+  }
+  h1 {
+    margin-bottom: 0.5rem;
+  }
+  p {
+    color: #666;
+  }
+</style>

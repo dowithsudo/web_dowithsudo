@@ -1,0 +1,27 @@
+---
+import { getCollection } from 'astro:content';
+// Gunakan alias @ agar lebih rapi
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+// 1. Ganti filter menjadi 'en/'
+const posts = await getCollection('blog', ({ id }) => id.startsWith('en/'));
+---
+
+<BaseLayout title="My Blog">
+  <h1>English Articles</h1>
+  <ul>
+    {posts.map(post => {
+      // 2. Ambil slug (membersihkan 'en/' dan '.md')
+      const slug = post.id.split('/').pop()?.split('.')[0];
+      
+      return (
+        <li>
+          {/* 3. Ganti link agar mengarah ke folder /en/ */}
+          <a href={`/en/blog/${slug}`}>
+            {post.data.title}
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+</BaseLayout>

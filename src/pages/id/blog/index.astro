@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+// Menggunakan alias @ yang tadi kita setting di tsconfig.json
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+// Filter konten yang ID-nya diawali dengan 'id/'
+const posts = await getCollection('blog', (entry) => entry.id.startsWith('id/'));
+---
+
+<BaseLayout title="Blog Saya">
+  <h1>Daftar Artikel</h1>
+  <ul>
+    {posts.map(post => {
+      // Mengambil slug saja (misal dari "id/test.md" menjadi "test")
+      const slug = post.id.split('/').pop()?.split('.')[0];
+      
+      return (
+        <li>
+          <a href={`/id/blog/${slug}`}>
+            {post.data.title}
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+</BaseLayout>
