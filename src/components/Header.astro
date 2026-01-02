@@ -1,5 +1,7 @@
 ---
 // src/components/Header.astro
+import Maskot from './Maskot.astro'; 
+
 const { isEn, alternatePath, currentPath } = Astro.props;
 
 const navLinks = [
@@ -14,16 +16,23 @@ const isActive = (path: string) => {
   if (path === '/id/' || path === '/en/') {
     return currentPath === path;
   }
-  // Menghindari active state ganda jika path adalah sub-path
   return currentPath.startsWith(path);
 };
 ---
 
 <header class="sticky top-0 z-50 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80 border-b border-border">
   <nav class="container-custom">
+    {/* Tinggi div h-16 tetap aman untuk maskot size 48-50 */}
     <div class="flex h-16 items-center justify-between">
-      <a href={isEn ? "/en/" : "/id/"} class="flex items-center gap-2 transition-transform hover:scale-105">
-        <span class="text-xl font-bold text-foreground">
+      <a href={isEn ? "/en/" : "/id/"} class="flex items-center gap-3 group transition-transform hover:scale-105">
+        
+        {/* UKURAN HEADER DINAIKKAN KE 48 agar lebih terlihat detailnya */}
+        <Maskot 
+          size={48} 
+          className="group-hover:rotate-12 transition-all duration-300 drop-shadow-sm" 
+        />
+
+        <span class="text-xl font-bold text-foreground tracking-tight">
           >_Do<span class="text-accent">WithSudo</span>
         </span>
       </a>
@@ -57,16 +66,13 @@ const isActive = (path: string) => {
         </a>
       </div>
 
-      <button
-        id="menu-toggle"
-        class="md:hidden p-2 -mr-2 text-foreground"
-        aria-label="Toggle menu"
-      >
+      <button id="menu-toggle" class="md:hidden p-2 -mr-2 text-foreground" aria-label="Toggle menu">
         <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
         <svg id="close-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
       </button>
     </div>
 
+    {/* Mobile Menu */}
     <div id="mobile-menu" class="hidden md:hidden border-t border-border">
       <div class="py-4 space-y-1">
         {navLinks.map((link) => (
@@ -81,28 +87,7 @@ const isActive = (path: string) => {
             {link.name}
           </a>
         ))}
-        <div class="pt-4 pb-2 px-2 flex flex-col gap-3">
-            <a href={alternatePath} class="text-center py-2 border border-border rounded-md font-medium">
-                {isEn ? "Ganti ke Bahasa Indonesia" : "Switch to English"}
-            </a>
-            <a href={isEn ? "/en/contact" : "/id/contact"} class="w-full text-center bg-accent py-3 rounded-md text-accent-foreground font-medium">
-                {isEn ? "Get a Quote" : "Hubungi Kami"}
-            </a>
-        </div>
       </div>
     </div>
   </nav>
 </header>
-
-<script>
-  const btn = document.getElementById('menu-toggle');
-  const menu = document.getElementById('mobile-menu');
-  const menuIcon = document.getElementById('menu-icon');
-  const closeIcon = document.getElementById('close-icon');
-
-  btn?.addEventListener('click', () => {
-    menu?.classList.toggle('hidden');
-    menuIcon?.classList.toggle('hidden');
-    closeIcon?.classList.toggle('hidden');
-  });
-</script>

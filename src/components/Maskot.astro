@@ -1,0 +1,30 @@
+---
+// src/components/Maskot.astro
+import { Image } from 'astro:assets';
+import pinguinImage from '../assets/maskot-dws.png';
+
+interface Props {
+  size?: number;
+  className?: string;
+}
+
+const { size = 40, className = "" } = Astro.props;
+---
+
+<div class={`maskot-container ${className}`} style={`width: ${size}px; height: ${size}px;`}>
+  <Image 
+    src={pinguinImage} 
+    alt="DoWithSudo Mascot" 
+    width={size * 2} 
+    height={size * 2}
+    class="w-full h-full object-contain"
+  />
+</div>
+
+<style>
+  .maskot-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
