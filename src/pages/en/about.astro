@@ -2,12 +2,12 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
 const sections = [
-  { id: 'summary', title: 'Profil Profesional' },
-  { id: 'experience', title: 'Pengalaman Kerja' },
-  { id: 'skills', title: 'Keahlian Utama' },
+  { id: 'summary', title: 'Professional Profile' },
+  { id: 'experience', title: 'Work Experience' },
+  { id: 'skills', title: 'Core Competencies' },
   { id: 'tech-stack', title: 'Tech Stack' },
-  { id: 'certifications', title: 'Sertifikasi' },
-  { id: 'contact', title: 'Kontak' }
+  { id: 'certifications', title: 'Certifications' },
+  { id: 'contact', title: 'Contact' }
 ];
 
 const experiences = [
@@ -15,38 +15,38 @@ const experiences = [
     role: "IT Infrastructure & Network Administrator",
     official: "Official Title: IT Support",
     company: "PT Geoservices",
-    period: "Juli 2022 – Sekarang",
+    period: "July 2022 – Present",
     location: "Bekasi, Indonesia",
     points: [
-      "Pengelolaan infrastruktur enterprise (server, jaringan, firewall, NAS, CCTV, PABX).",
-      "Monitoring proaktif dan strategi backup/recovery ketersediaan sistem.",
-      "Titik eskalasi utama untuk insiden infrastruktur dan jaringan.",
-      "Dokumentasi teknis dan penyusunan internal knowledge base."
+      "Managing enterprise IT infrastructure (servers, networks, firewalls, NAS, CCTV, and PABX).",
+      "Proactive monitoring and backup/recovery strategies for high system availability.",
+      "Acting as the primary escalation point for infrastructure and network incidents.",
+      "Developing technical documentation and internal knowledge base systems."
     ]
   },
   {
     role: "IT Infrastructure & Network Administrator",
     official: "Official Title: IT Support",
     company: "PT Bahtera Niaga Internasional",
-    period: "Juni 2011 – Juli 2022",
+    period: "June 2011 – July 2022",
     location: "Jakarta, Indonesia",
     points: [
-      "Menjaga ketersediaan sistem hingga 99,9% melalui otomasi backup.",
-      "Optimasi LAN/WAN, Wi-Fi, dan pengelolaan server enterprise.",
-      "Menyusun prosedur troubleshooting terstruktur untuk mengurangi downtime.",
-      "Implementasi sistem pendukung: CCTV, PABX, dan Website perusahaan."
+      "Maintaining 99.9% system uptime through automated backups and proactive maintenance.",
+      "Optimizing LAN/WAN, Wi-Fi, and managing enterprise-grade server environments.",
+      "Developing structured troubleshooting procedures to minimize downtime.",
+      "Implementing operational support systems including CCTV, PABX, and corporate websites."
     ]
   }
 ];
 ---
 
-<BaseLayout title="Profil Profesional | Kamandanu Wijaya">
+<BaseLayout title="Professional Profile | Kamandanu Wijaya">
   <main class="bg-white min-h-screen pb-20">
     <header class="py-16 border-b border-slate-100 bg-slate-50/50 mb-12">
       <div class="max-w-6xl mx-auto px-6">
         <div class="flex flex-col md:flex-row gap-8 items-center md:items-start">
           <div class="relative group">
-            <div class="absolute -inset-1 bg-linear-to-r from-[#26a69a] to-slate-900 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+            <div class="absolute -inset-1 bg-gradient-to-r from-[#26a69a] to-slate-900 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
             <img 
               src="/img/avatar.png" 
               alt="Kamandanu Wijaya" 
@@ -56,23 +56,23 @@ const experiences = [
 
           <div class="flex-1 text-center md:text-left">
             <div class="inline-block px-3 py-1 rounded-full bg-[#26a69a]/10 text-[#26a69a] text-xs font-bold mb-4 tracking-wider">
-              PENGALAMAN 14+ TAHUN
+              14+ YEARS OF EXPERIENCE
             </div>
             <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">
               Kamandanu Wijaya
             </h1>
             <p class="text-lg text-[#26a69a] font-semibold mb-2">IT Infrastructure & Network Administrator</p>
             <p class="text-slate-500 max-w-2xl leading-relaxed mb-6">
-              Berfokus pada stabilitas sistem, keamanan, dan keberlangsungan operasional bisnis enterprise.
+              Focusing on system stability, cybersecurity, and enterprise business continuity.
             </p>
             
             <a 
               href="/cv/wijaya-cv.pdf" 
-              download="CV_Kamandanu_Wijaya_ID.pdf"
+              download="CV_Kamandanu_Wijaya_EN.pdf"
               class="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-xl font-bold hover:bg-[#26a69a] transition-all shadow-lg hover:shadow-[#26a69a]/20"
             >
               <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              Unduh CV (PDF)
+              Download CV (PDF)
             </a>
           </div>
         </div>
@@ -87,14 +87,14 @@ const experiences = [
           <section id="summary" class="scroll-mt-24">
             <h2 class="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
               <span class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center text-sm">01</span>
-              Profil Profesional
+              Professional Profile
             </h2>
             <div class="prose prose-slate max-w-none text-slate-600 leading-relaxed space-y-4">
               <p>
-                Saya bertanggung jawab atas pengelolaan infrastruktur server dan jaringan, termasuk ketersediaan sistem, keamanan, monitoring, serta operasional IT secara menyeluruh dengan pendekatan yang terstruktur dan preventif.
+                I am responsible for managing server and network infrastructure, ensuring system availability, security, and monitoring, while maintaining overall IT operations with a structured and preventive approach.
               </p>
               <p class="bg-[#26a69a]/5 border-l-4 border-[#26a69a] p-4 italic">
-                Meskipun secara struktural berperan sebagai IT Support, ruang lingkup tanggung jawab saya mencakup administrasi server, pengelolaan infrastruktur jaringan, penguatan keamanan, serta pengendalian sistem kritikal dengan standar keandalan tinggi.
+                While my structural role is IT Support, my scope of responsibility encompasses server administration, network infrastructure management, security hardening, and the control of critical systems with high-reliability standards.
               </p>
             </div>
           </section>
@@ -102,12 +102,12 @@ const experiences = [
           <section id="experience" class="scroll-mt-24">
             <h2 class="text-2xl font-bold text-slate-900 mb-8 flex items-center gap-3">
               <span class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center text-sm">02</span>
-              Pengalaman Kerja
+              Work Experience
             </h2>
             <div class="space-y-10">
               {experiences.map(exp => (
                 <div class="relative pl-8 border-l-2 border-slate-100">
-                  <div class="absolute -left-2.25 top-0 w-4 h-4 rounded-full bg-[#26a69a]"></div>
+                  <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-[#26a69a]"></div>
                   <div class="flex flex-wrap justify-between items-start mb-2">
                     <div>
                       <h3 class="text-xl font-bold text-slate-900">{exp.role}</h3>
@@ -132,21 +132,21 @@ const experiences = [
           <section id="skills" class="scroll-mt-24">
             <h2 class="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
               <span class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center text-sm">03</span>
-              Keahlian Utama
+              Core Competencies
             </h2>
             <div class="overflow-hidden border border-slate-200 rounded-xl">
               <table class="w-full text-left text-sm">
                 <thead class="bg-slate-50 text-slate-900 font-bold border-b border-slate-200">
                   <tr>
-                    <th class="px-6 py-4">Bidang</th>
-                    <th class="px-6 py-4">Kompetensi</th>
+                    <th class="px-6 py-4">Domain</th>
+                    <th class="px-6 py-4">Expertise</th>
                   </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-100 text-slate-600">
-                  <tr><td class="px-6 py-4 font-semibold text-slate-900 bg-slate-50/30 w-1/3">Infrastruktur IT</td><td class="px-6 py-4">Server & Infrastructure Administration, Virtualization</td></tr>
-                  <tr><td class="px-6 py-4 font-semibold text-slate-900 bg-slate-50/30">Jaringan</td><td class="px-6 py-4">Network Management, LAN/WAN, Network Security</td></tr>
-                  <tr><td class="px-6 py-4 font-semibold text-slate-900 bg-slate-50/30">Keamanan Sistem</td><td class="px-6 py-4">Cybersecurity, Firewall Management</td></tr>
-                  <tr><td class="px-6 py-4 font-semibold text-slate-900 bg-slate-50/30">Monitoring</td><td class="px-6 py-4">System Monitoring, Backup & Recovery</td></tr>
+                  <tr><td class="px-6 py-4 font-semibold text-slate-900 bg-slate-50/30 w-1/3">IT Infrastructure</td><td class="px-6 py-4">Server & Infrastructure Administration, Virtualization</td></tr>
+                  <tr><td class="px-6 py-4 font-semibold text-slate-900 bg-slate-50/30">Networking</td><td class="px-6 py-4">Network Management, LAN/WAN, Network Security</td></tr>
+                  <tr><td class="px-6 py-4 font-semibold text-slate-900 bg-slate-50/30">Cybersecurity</td><td class="px-6 py-4">Firewall Management, System Hardening</td></tr>
+                  <tr><td class="px-6 py-4 font-semibold text-slate-900 bg-slate-50/30">Reliability</td><td class="px-6 py-4">System Monitoring, Backup & Disaster Recovery</td></tr>
                 </tbody>
               </table>
             </div>
@@ -157,48 +157,24 @@ const experiences = [
               <span class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center text-sm">04</span>
               Tech Stack
             </h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-  {[
-    { 
-      cat: "Server & Virtualization", 
-      tech: "Linux (Ubuntu/CentOS), Windows Server, Proxmox, VMware, OS Boxes",
-      icon: "🖥️"
-    },
-    { 
-      cat: "Networking & Security", 
-      tech: "MikroTik, Cisco, Firewall, VPN, VLAN, TCP/IP, LAN/WAN",
-      icon: "🌐"
-    },
-    { 
-      cat: "DevOps & Automation", 
-      tech: "Docker, Ansible, Terraform, Git, Jenkins, Bash Scripting",
-      icon: "⚡"
-    },
-    { 
-      cat: "Monitoring & Reliability", 
-      tech: "Nagios, Zabbix, System Monitoring, Backup & Recovery",
-      icon: "📈"
-    },
-    { 
-      cat: "Web Development", 
-      tech: "Node.js, Express, React, Django, WordPress, HTML/CSS",
-      icon: "🚀"
-    },
-    { 
-      cat: "Database & Services", 
-      tech: "MySQL, MS SQL Server, Nginx, Apache, DNS, Mail Server",
-      icon: "🗄️"
-    }
-  ].map(item => (
-    <div class="p-5 rounded-2xl bg-white border border-slate-100 shadow-sm hover:border-[#26a69a]/30 transition-all group hover:-translate-y-1">
-      <div class="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center mb-4 group-hover:bg-[#26a69a]/10 transition-all duration-300">
-        <span class="text-2xl group-hover:scale-110 transition-transform duration-300">{item.icon}</span>
-      </div>
-      <h4 class="text-sm font-bold text-slate-900 mb-2 group-hover:text-[#26a69a] transition-colors">{item.cat}</h4>
-      <p class="text-xs text-slate-500 leading-relaxed font-medium">{item.tech}</p>
-    </div>
-  ))}
-</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {[
+                { cat: "Server & Virtualization", tech: "Linux (Ubuntu/CentOS), Windows Server, Proxmox, VMware, OS Boxes", icon: "🖥️" },
+                { cat: "Networking & Security", tech: "MikroTik, Cisco, Firewall, VPN, VLAN, TCP/IP, LAN/WAN", icon: "🌐" },
+                { cat: "DevOps & Automation", tech: "Docker, Ansible, Terraform, Git, Jenkins, Bash Scripting", icon: "⚡" },
+                { cat: "Monitoring & Reliability", tech: "Nagios, Zabbix, System Monitoring, Backup & Recovery", icon: "📈" },
+                { cat: "Web Development", tech: "Node.js, Express, React, Django, WordPress, HTML/CSS", icon: "🚀" },
+                { cat: "Database & Services", tech: "MySQL, MS SQL Server, Nginx, Apache, DNS, Mail Server", icon: "🗄️" }
+              ].map(item => (
+                <div class="p-5 rounded-2xl bg-white border border-slate-100 shadow-sm hover:border-[#26a69a]/30 transition-all group hover:-translate-y-1">
+                  <div class="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center mb-4 group-hover:bg-[#26a69a]/10 transition-all duration-300">
+                    <span class="text-2xl group-hover:scale-110 transition-transform duration-300">{item.icon}</span>
+                  </div>
+                  <h4 class="text-sm font-bold text-slate-900 mb-2 group-hover:text-[#26a69a] transition-colors">{item.cat}</h4>
+                  <p class="text-xs text-slate-500 leading-relaxed font-medium">{item.tech}</p>
+                </div>
+              ))}
+            </div>
             
             <div class="mt-6 p-4 rounded-xl bg-slate-50 border border-dashed border-slate-200 flex flex-wrap gap-6 items-center justify-center">
                <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Peripheral Support:</span>
@@ -211,15 +187,15 @@ const experiences = [
           </section>
 
           <section id="contact" class="scroll-mt-24 bg-slate-900 rounded-3xl p-8 text-white">
-            <h2 class="text-2xl font-bold mb-6">Hubungi Saya</h2>
-            <p class="text-slate-400 mb-8 max-w-md">Jika Anda membutuhkan kolaborasi atau dukungan terkait infrastruktur IT enterprise.</p>
+            <h2 class="text-2xl font-bold mb-6">Contact Me</h2>
+            <p class="text-slate-400 mb-8 max-w-md">If you need collaboration or support regarding enterprise IT infrastructure.</p>
             <div class="grid md:grid-cols-2 gap-6">
               <a href="mailto:kamandanu.wijaya@gmail.com" class="group block p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-[#26a69a] transition-all">
-                <p class="text-xs text-slate-400 group-hover:text-white/80">Email</p>
+                <p class="text-xs text-slate-400 group-hover:text-white/80 uppercase">Email</p>
                 <p class="font-bold">kamandanu.wijaya@gmail.com</p>
               </a>
               <a href="https://wa.me/628122233129" class="group block p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-[#26a69a] transition-all">
-                <p class="text-xs text-slate-400 group-hover:text-white/80">WhatsApp</p>
+                <p class="text-xs text-slate-400 group-hover:text-white/80 uppercase">WhatsApp</p>
                 <p class="font-bold">+62 812 2233 129</p>
               </a>
             </div>
@@ -229,7 +205,7 @@ const experiences = [
 
         <aside class="hidden lg:block sticky top-24">
           <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6">
-            <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">Navigasi</h2>
+            <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">Navigation</h2>
             <nav>
               <ul class="space-y-4 text-sm font-medium">
                 {sections.map((item, idx) => (
