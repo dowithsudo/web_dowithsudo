@@ -4,7 +4,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 const sections = [
   { id: 'summary', title: 'Profil Profesional' },
   { id: 'experience', title: 'Pengalaman Kerja' },
-  { id: 'skills', title: 'Keahlian Utama' },
+  { id: 'skills', title: 'Kompetensi Utama' },
   { id: 'tech-stack', title: 'Tech Stack' },
   { id: 'certifications', title: 'Sertifikasi' },
   { id: 'contact', title: 'Kontak' }
@@ -13,29 +13,80 @@ const sections = [
 const experiences = [
   {
     role: "IT Infrastructure & Network Administrator",
-    official: "Official Title: IT Support",
+    official: "Jabatan Resmi: IT Support",
     company: "PT Geoservices",
     period: "Juli 2022 – Sekarang",
     location: "Bekasi, Indonesia",
     points: [
-      "Pengelolaan infrastruktur enterprise (server, jaringan, firewall, NAS, CCTV, PABX).",
-      "Monitoring proaktif dan strategi backup/recovery ketersediaan sistem.",
-      "Titik eskalasi utama untuk insiden infrastruktur dan jaringan.",
-      "Dokumentasi teknis dan penyusunan internal knowledge base."
+      "Mengelola infrastruktur IT perusahaan (server, jaringan, firewall, NAS, CCTV, dan PABX).",
+      "Strategi pemantauan proaktif dan backup/recovery untuk ketersediaan sistem yang tinggi.",
+      "Bertindak sebagai titik eskalasi utama untuk insiden infrastruktur dan jaringan.",
+      "Mengembangkan dokumentasi teknis dan sistem basis pengetahuan internal."
     ]
   },
   {
     role: "IT Infrastructure & Network Administrator",
-    official: "Official Title: IT Support",
+    official: "Jabatan Resmi: IT Support",
     company: "PT Bahtera Niaga Internasional",
     period: "Juni 2011 – Juli 2022",
     location: "Jakarta, Indonesia",
     points: [
-      "Menjaga ketersediaan sistem hingga 99,9% melalui otomasi backup.",
-      "Optimasi LAN/WAN, Wi-Fi, dan pengelolaan server enterprise.",
-      "Menyusun prosedur troubleshooting terstruktur untuk mengurangi downtime.",
-      "Implementasi sistem pendukung: CCTV, PABX, dan Website perusahaan."
+      "Menjaga uptime sistem 99,9% melalui backup otomatis dan pemeliharaan proaktif.",
+      "Optimasi LAN/WAN, Wi-Fi, dan pengelolaan lingkungan server tingkat perusahaan.",
+      "Mengembangkan prosedur pemecahan masalah terstruktur untuk meminimalkan downtime.",
+      "Implementasi sistem pendukung operasional termasuk CCTV, PABX, dan website korporat."
     ]
+  }
+];
+
+const certifications = [
+  {
+    title: "IT Support Google",
+    issuer: "Google (via Coursera)",
+    year: "2023",
+    description: "Program profesional IT support yang mencakup dasar-dasar dukungan teknis, jaringan komputer, sistem operasi, administrasi sistem, dan keamanan IT.",
+    category: "Infrastructure",
+    image: "/img/cert/google.webp"
+  },
+  {
+    title: "DevOps",
+    issuer: "ID-Networkers (IDN.ID)",
+    year: "2020",
+    description: "Bootcamp DevOps yang mencakup Git, CI/CD dengan Jenkins, kontainerisasi menggunakan Docker, Ansible, dan pemantauan dengan Nagios.",
+    category: "Infrastructure",
+    image: "/img/cert/idn.webp"
+  },
+  {
+    title: "Ethical Hacker",
+    issuer: "Cisco Network Academy",
+    year: "2025",
+    description: "Dasar-dasar keamanan ofensif, termasuk ethical hacking, penetration testing, dan penilaian kerentanan (vulnerability assessment).",
+    category: "Cybersecurity",
+    image: "/img/cert/cna-eh.webp"
+  },
+  {
+    title: "Introduction to Cybersecurity",
+    issuer: "Cisco Network Academy",
+    year: "2025",
+    description: "Kursus dasar mengenai perlindungan aset digital dan pemahaman tantangan keamanan modern.",
+    category: "Cybersecurity",
+    image: "/img/cert/cna-ic.webp"
+  },
+  {
+    title: "Full Stack Web Development",
+    issuer: "Binar Academy",
+    year: "2021",
+    description: "Bootcamp intensif membangun aplikasi menggunakan Node.js, React, dan RESTful APIs.",
+    category: "Development",
+    image: "/img/cert/binar.webp"
+  },
+  {
+    title: "Full Stack Web Developer",
+    issuer: "Code Artisan Academy",
+    year: "2020",
+    description: "Bootcamp yang berfokus pada Python, Django, dan SQL untuk membangun aplikasi berbasis web yang handal.",
+    category: "Development",
+    image: "/img/cert/codeartisan.webp"
   }
 ];
 ---
@@ -50,12 +101,15 @@ const experiences = [
             <img 
               src="/img/avatar.png" 
               alt="Kamandanu Wijaya" 
+              width="160"
+              height="160"
+              fetchpriority="high"
               class="relative w-32 h-32 md:w-40 md:h-40 rounded-2xl object-cover border-2 border-white shadow-xl"
             />
           </div>
 
           <div class="flex-1 text-center md:text-left">
-            <div class="inline-block px-3 py-1 rounded-full bg-[#26a69a]/10 text-[#1e8d82] text-xs font-bold mb-4 tracking-wider">
+            <div class="inline-block px-3 py-1 rounded-full bg-[#26a69a]/10 text-[#1e8d82] text-xs font-bold mb-4 tracking-wider uppercase">
               PENGALAMAN 14+ TAHUN
             </div>
             <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">
@@ -63,21 +117,21 @@ const experiences = [
             </h1>
             <p class="text-lg text-[#1e8d82] font-semibold mb-2">IT Infrastructure & Network Administrator</p>
             <p class="text-slate-600 max-w-2xl leading-relaxed mb-8">
-              Berfokus pada stabilitas sistem, keamanan, dan keberlangsungan operasional bisnis enterprise.
+              Berfokus pada stabilitas sistem, keamanan, dan keberlangsungan operasional bisnis tingkat perusahaan.
             </p>
             
-            <div class="flex items-center justify-center md:justify-start gap-2 mb-4">
+            <div class="flex items-center justify-center md:justify-start gap-2 mb-6">
               <span class="relative flex h-3 w-3">
                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
               </span>
               <span class="text-sm font-bold text-slate-700 uppercase tracking-wide">
-                Open to Work & Projects
+                Terbuka untuk Pekerjaan & Proyek
               </span>
             </div>
 
             <a 
-              href="/cv/wijaya-cv.pdf" 
+              href="/cv/wijaya-cv-id.pdf" 
               download="CV_Kamandanu_Wijaya_ID.pdf"
               class="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-xl font-bold hover:bg-[#26a69a] transition-all shadow-lg hover:shadow-[#26a69a]/20"
             >
@@ -93,35 +147,34 @@ const experiences = [
       <div class="grid lg:grid-cols-4 gap-12 items-start">
         
         <div class="lg:col-span-3 space-y-20">
-          
           <section id="summary" class="scroll-mt-24">
             <h2 class="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
-              <span class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center text-sm">01</span>
+              <span class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center text-sm" aria-hidden="true">01</span>
               Profil Profesional
             </h2>
             <div class="prose prose-slate max-w-none text-slate-600 leading-relaxed space-y-4">
               <p>
-                Saya bertanggung jawab atas pengelolaan infrastruktur server dan jaringan, termasuk ketersediaan sistem, keamanan, monitoring, serta operasional IT secara menyeluruh dengan pendekatan yang terstruktur dan preventif.
+                Saya bertanggung jawab mengelola infrastruktur server dan jaringan, memastikan ketersediaan sistem, keamanan, dan pemantauan, sembari menjaga operasional IT secara keseluruhan dengan pendekatan yang terstruktur dan preventif.
               </p>
               <p class="bg-[#26a69a]/5 border-l-4 border-[#26a69a] p-4 italic">
-                Meskipun secara struktural berperan sebagai IT Support, ruang lingkup tanggung jawab saya mencakup administrasi server, pengelolaan infrastruktur jaringan, penguatan keamanan, serta pengendalian sistem kritikal dengan standar keandalan tinggi.
+                Meskipun secara struktural jabatan saya adalah IT Support, lingkup tanggung jawab saya mencakup administrasi server, manajemen infrastruktur jaringan, penguatan keamanan (hardening), dan kontrol sistem kritis dengan standar keandalan tinggi.
               </p>
             </div>
           </section>
 
           <section id="experience" class="scroll-mt-24">
             <h2 class="text-2xl font-bold text-slate-900 mb-8 flex items-center gap-3">
-              <span class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center text-sm">02</span>
+              <span class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center text-sm" aria-hidden="true">02</span>
               Pengalaman Kerja
             </h2>
             <div class="space-y-10">
               {experiences.map(exp => (
                 <div class="relative pl-8 border-l-2 border-slate-100">
                   <div class="absolute -left-2.25 top-0 w-4 h-4 rounded-full bg-[#26a69a]"></div>
-                  <div class="flex flex-wrap justify-between items-start mb-2">
+                  <div class="flex flex-wrap justify-between items-start mb-2 gap-2">
                     <div>
                       <h3 class="text-xl font-bold text-slate-900">{exp.role}</h3>
-                      <p class="text-[#26a69a] font-medium text-sm">{exp.official}</p>
+                      <p class="text-[#1e8d82] font-semibold text-sm">{exp.official}</p>
                     </div>
                     <span class="text-sm font-bold text-slate-400 uppercase tracking-wider">{exp.period}</span>
                   </div>
@@ -141,22 +194,22 @@ const experiences = [
 
           <section id="skills" class="scroll-mt-24">
             <h2 class="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
-              <span class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center text-sm">03</span>
-              Keahlian Utama
+              <span class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center text-sm" aria-hidden="true">03</span>
+              Kompetensi Utama
             </h2>
-            <div class="overflow-hidden border border-slate-200 rounded-xl">
+            <div class="overflow-x-auto border border-slate-200 rounded-xl">
               <table class="w-full text-left text-sm">
                 <thead class="bg-slate-50 text-slate-900 font-bold border-b border-slate-200">
                   <tr>
-                    <th class="px-6 py-4">Bidang</th>
-                    <th class="px-6 py-4">Kompetensi</th>
+                    <th class="px-6 py-4">Domain</th>
+                    <th class="px-6 py-4">Keahlian</th>
                   </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-100 text-slate-600">
-                  <tr><td class="px-6 py-4 font-semibold text-slate-900 bg-slate-50/30 w-1/3">Infrastruktur IT</td><td class="px-6 py-4">Server & Infrastructure Administration, Virtualization</td></tr>
-                  <tr><td class="px-6 py-4 font-semibold text-slate-900 bg-slate-50/30">Jaringan</td><td class="px-6 py-4">Network Management, LAN/WAN, Network Security</td></tr>
-                  <tr><td class="px-6 py-4 font-semibold text-slate-900 bg-slate-50/30">Keamanan Sistem</td><td class="px-6 py-4">Cybersecurity, Firewall Management</td></tr>
-                  <tr><td class="px-6 py-4 font-semibold text-slate-900 bg-slate-50/30">Monitoring</td><td class="px-6 py-4">System Monitoring, Backup & Recovery</td></tr>
+                  <tr><td class="px-6 py-4 font-semibold text-slate-900 bg-slate-50/30 w-1/3">Infrastruktur IT</td><td class="px-6 py-4">Administrasi Server & Infrastruktur, Virtualisasi</td></tr>
+                  <tr><td class="px-6 py-4 font-semibold text-slate-900 bg-slate-50/30">Jaringan</td><td class="px-6 py-4">Manajemen Jaringan, LAN/WAN, Keamanan Jaringan</td></tr>
+                  <tr><td class="px-6 py-4 font-semibold text-slate-900 bg-slate-50/30">Keamanan Siber</td><td class="px-6 py-4">Manajemen Firewall, System Hardening</td></tr>
+                  <tr><td class="px-6 py-4 font-semibold text-slate-900 bg-slate-50/30">Keandalan</td><td class="px-6 py-4">Pemantauan Sistem, Backup & Disaster Recovery</td></tr>
                 </tbody>
               </table>
             </div>
@@ -164,72 +217,94 @@ const experiences = [
 
           <section id="tech-stack" class="scroll-mt-24">
             <h2 class="text-2xl font-bold text-slate-900 mb-8 flex items-center gap-3">
-              <span class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center text-sm">04</span>
+              <span class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center text-sm" aria-hidden="true">04</span>
               Tech Stack
             </h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-  {[
-    { 
-      cat: "Server & Virtualization", 
-      tech: "Linux (Ubuntu/CentOS), Windows Server, Proxmox, VMware, OS Boxes",
-      icon: "🖥️"
-    },
-    { 
-      cat: "Networking & Security", 
-      tech: "MikroTik, Cisco, Firewall, VPN, VLAN, TCP/IP, LAN/WAN",
-      icon: "🌐"
-    },
-    { 
-      cat: "DevOps & Automation", 
-      tech: "Docker, Ansible, Terraform, Git, Jenkins, Bash Scripting",
-      icon: "⚡"
-    },
-    { 
-      cat: "Monitoring & Reliability", 
-      tech: "Nagios, Zabbix, System Monitoring, Backup & Recovery",
-      icon: "📈"
-    },
-    { 
-      cat: "Web Development", 
-      tech: "Node.js, Express, React, Django, WordPress, HTML/CSS",
-      icon: "🚀"
-    },
-    { 
-      cat: "Database & Services", 
-      tech: "MySQL, MS SQL Server, Nginx, Apache, DNS, Mail Server",
-      icon: "🗄️"
-    }
-  ].map(item => (
-    <div class="p-5 rounded-2xl bg-white border border-slate-100 shadow-sm hover:border-[#26a69a]/30 transition-all group hover:-translate-y-1">
-      <div class="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center mb-4 group-hover:bg-[#26a69a]/10 transition-all duration-300">
-        <span class="text-2xl group-hover:scale-110 transition-transform duration-300">{item.icon}</span>
-      </div>
-      <h4 class="text-sm font-bold text-slate-900 mb-2 group-hover:text-[#26a69a] transition-colors">{item.cat}</h4>
-      <p class="text-xs text-slate-500 leading-relaxed font-medium">{item.tech}</p>
-    </div>
-  ))}
-</div>
-            
-            <div class="mt-6 p-4 rounded-xl bg-slate-50 border border-dashed border-slate-200 flex flex-wrap gap-6 items-center justify-center">
-               <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Peripheral Support:</span>
-               {["NAS Storage", "CCTV System", "PABX/VoIP"].map(device => (
-                 <span class="text-sm font-semibold text-slate-600 flex items-center gap-2">
-                   <span class="w-1.5 h-1.5 rounded-full bg-[#26a69a]"></span> {device}
-                 </span>
-               ))}
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {[
+                { cat: "Server & Virtualization", tech: "Linux, Windows Server, Proxmox, VMware", icon: "🖥️" },
+                { cat: "Networking & Security", tech: "MikroTik, Cisco, Firewall, VPN, VLAN, TCP/IP", icon: "🌐" },
+                { cat: "DevOps & Automation", tech: "Docker, Ansible, Terraform, Git, Bash Scripting", icon: "⚡" },
+                { cat: "Monitoring & Reliability", tech: "Nagios, Zabbix, Monitoring, Backup & Recovery", icon: "📈" },
+                { cat: "Web Development", tech: "Node.js, Express, React, Django, WordPress", icon: "🚀" },
+                { cat: "Database & Services", tech: "MySQL, MS SQL Server, Nginx, Apache, DNS", icon: "🗄️" }
+              ].map(item => (
+                <div class="p-5 rounded-2xl bg-white border border-slate-100 shadow-sm hover:border-[#26a69a]/30 transition-all group hover:-translate-y-1">
+                  <div class="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center mb-4 group-hover:bg-[#26a69a]/10 transition-all duration-300">
+                    <span class="text-2xl group-hover:scale-110 transition-transform duration-300" role="img" aria-label={item.cat}>{item.icon}</span>
+                  </div>
+                  <h3 class="text-sm font-bold text-slate-900 mb-2 group-hover:text-[#1e8d82] transition-colors">{item.cat}</h3>
+                  <p class="text-xs text-slate-500 leading-relaxed font-medium">{item.tech}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section id="certifications" class="scroll-mt-24">
+            <h2 class="text-2xl font-bold text-slate-900 mb-8 flex items-center gap-3">
+              <span class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center text-sm" aria-hidden="true">05</span>
+              Sertifikasi
+            </h2>
+            <div class="grid gap-4">
+              {certifications.map((cert, index) => (
+                <div class="border border-slate-200 rounded-2xl overflow-hidden bg-white hover:border-[#26a69a]/30 transition-all shadow-sm">
+                  <button 
+                    class="w-full px-6 py-5 text-left flex items-center justify-between group focus:outline-none"
+                    onclick={`const content = document.getElementById('cert-content-${index}'); 
+                              const icon = document.getElementById('cert-icon-${index}');
+                              content.classList.toggle('hidden');
+                              icon.classList.toggle('rotate-180');`}
+                  >
+                    <div class="flex-1 text-left">
+                      <div class="flex items-center gap-2 mb-1">
+                         <h3 class="font-bold text-slate-900 group-hover:text-[#1e8d82] transition-colors line-clamp-1">{cert.title}</h3>
+                         <span class={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-tighter ${cert.category === 'Development' ? 'bg-emerald-100 text-emerald-700' : 'bg-blue-100 text-blue-700'}`}>
+                          {cert.category}
+                         </span>
+                      </div>
+                      <p class="text-sm text-slate-500 font-medium">{cert.issuer} • {cert.year}</p>
+                    </div>
+                    <svg id={`cert-icon-${index}`} xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-slate-400 group-hover:text-[#26a69a] transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+
+                  <div id={`cert-content-${index}`} class="hidden px-6 pb-6 border-t border-slate-100 bg-slate-50/50">
+                    <div class="pt-4">
+                      <p class="text-sm text-slate-600 mb-4 leading-relaxed italic">
+                        "{cert.description}"
+                      </p>
+                      {cert.image && (
+                        <div class="mb-4 overflow-hidden rounded-xl border border-slate-200 shadow-sm bg-white">
+                          <img 
+                            src={cert.image} 
+                            alt={`Sertifikat ${cert.title}`}
+                            loading="lazy"
+                            class="w-full h-auto object-cover"
+                          />
+                        </div>
+                      )}
+                      <div class="flex items-center gap-4">
+                        <span class="text-[11px] font-bold text-slate-400 uppercase tracking-tighter">Kredensial Terverifikasi</span>
+                        <div class="h-px flex-1 bg-slate-200"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </section>
 
           <section id="contact" class="scroll-mt-24 bg-slate-900 rounded-3xl p-8 text-white">
             <h2 class="text-2xl font-bold mb-6">Hubungi Saya</h2>
-            <p class="text-slate-400 mb-8 max-w-md">Jika Anda membutuhkan kolaborasi atau dukungan terkait infrastruktur IT enterprise.</p>
+            <p class="text-slate-400 mb-8 max-w-md">Jika Anda membutuhkan kolaborasi atau dukungan terkait infrastruktur IT perusahaan.</p>
             <div class="grid md:grid-cols-2 gap-6">
               <a href="mailto:kamandanu.wijaya@gmail.com" class="group block p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-[#26a69a] transition-all">
-                <p class="text-xs text-slate-400 group-hover:text-white/80">Email</p>
+                <p class="text-xs text-slate-400 group-hover:text-white/80 uppercase font-bold tracking-tighter">Email</p>
                 <p class="font-bold">kamandanu.wijaya@gmail.com</p>
               </a>
               <a href="https://wa.me/628122233129" class="group block p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-[#26a69a] transition-all">
-                <p class="text-xs text-slate-400 group-hover:text-white/80">WhatsApp</p>
+                <p class="text-xs text-slate-400 group-hover:text-white/80 uppercase font-bold tracking-tighter">WhatsApp</p>
                 <p class="font-bold">+62 812 2233 129</p>
               </a>
             </div>
@@ -239,13 +314,13 @@ const experiences = [
 
         <aside class="hidden lg:block sticky top-24">
           <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6">
-            <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">Navigasi</h2>
-            <nav>
+            <h2 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-6">Navigasi</h2>
+            <nav aria-label="Sidebar navigation">
               <ul class="space-y-4 text-sm font-medium">
                 {sections.map((item, idx) => (
                   <li>
-                    <a href={`#${item.id}`} class="text-slate-600 hover:text-[#26a69a] transition-colors flex items-center gap-2">
-                      <span class="text-slate-300 font-mono">0{idx + 1}</span>
+                    <a href={`#${item.id}`} class="text-slate-600 hover:text-[#1e8d82] transition-colors flex items-center gap-2">
+                      <span class="text-slate-400 font-mono">0{idx + 1}</span>
                       {item.title}
                     </a>
                   </li>
