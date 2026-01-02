@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Tambahkan baris ini untuk Tailwind v4 */
+@plugin "@tailwindcss/typography";
+
 @theme {
   /* Font Family */
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
@@ -14,12 +17,12 @@
   --color-secondary: hsl(210 20% 96%);
   --color-secondary-foreground: hsl(215 25% 17%);
 
-  /* PERBAIKAN KONTRAS: Menggunakan warna gelap untuk teks di atas background Teal */
+  /* PERBAIKAN KONTRAS */
   --color-accent: hsl(174 62% 40%); 
-  --color-accent-foreground: hsl(174 95% 8%); /* Jauh lebih kontras dibanding putih */
+  --color-accent-foreground: hsl(174 95% 8%); 
 
   --color-muted: hsl(210 20% 96%);
-  --color-muted-foreground: hsl(215 25% 30%); /* Sedikit digelapkan agar lulus audit */
+  --color-muted-foreground: hsl(215 25% 30%); 
 
   --color-border: hsl(214 20% 90%);
   --color-input: hsl(214 20% 90%);
@@ -30,10 +33,6 @@
 
 /* Base Styles */
 @layer base {
-  /* OPTIMASI PERFORMANCE: 
-     Hapus @import font dari sini jika sudah ditaruh di BaseLayout.astro. 
-     Jika tetap di sini, tambahkan display=swap.
-  */
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
   html {
@@ -61,7 +60,9 @@
   @apply py-16 md:py-24;
 }
 
-/* CSS Counter untuk Penomoran TOC Otomatis */
+/* ============================================================
+   1. PENOMORAN OTOMATIS DI DALAM ISI ARTIKEL (PROSE)
+   ============================================================ */
 .prose {
   counter-reset: h2-counter;
 }
@@ -82,6 +83,36 @@
 
 .prose h3::before {
   content: counter(h2-counter) "." counter(h3-counter) " ";
-  /* Gunakan opacity yang lebih tinggi (80+) agar tetap lulus audit kontras */
   @apply text-accent/85 mr-2 text-sm;
+}
+
+/* ============================================================
+   2. PENOMORAN OTOMATIS DI SIDEBAR (TOC)
+   ============================================================ */
+.toc-container {
+  counter-reset: toc-h2;
+}
+
+.h2-item {
+  counter-reset: toc-h3;
+  counter-increment: toc-h2;
+}
+
+.h2-item a::before {
+  content: counter(toc-h2) ". ";
+  @apply font-bold text-accent mr-1.5;
+}
+
+.h3-item {
+  counter-increment: toc-h3;
+}
+
+.h3-item a::before {
+  content: counter(toc-h2) "." counter(toc-h3) " ";
+  @apply text-xs text-accent/70 mr-1.5 font-medium;
+}
+
+/* Efek transisi halus untuk semua link di TOC */
+.toc-item a {
+  @apply transition-colors duration-200;
 }

@@ -98,21 +98,20 @@ const enUrl = new URL(isEn ? pathname : alternatePath, siteUrl);
     )}
   </head>
   
-  <body class="bg-background text-foreground antialiased min-h-screen flex flex-col">
+  <body class="bg-background text-foreground antialiased min-h-screen">
     <Header 
       isEn={isEn} 
       alternatePath={alternatePath} 
       currentPath={pathname} 
     />
 
-    <main class="grow">
+    <main class="block overflow-visible min-h-[calc(100vh-200px)]">
       <slot />
     </main>
 
     <Footer isEn={isEn} />
 
     <script is:inline>
-      // Persistence preferensi bahasa
       document.addEventListener('click', (e) => {
         const switcher = e.target.closest('#lang-switcher');
         if (switcher) {
@@ -123,3 +122,10 @@ const enUrl = new URL(isEn ? pathname : alternatePath, siteUrl);
     </script>
   </body>
 </html>
+
+<style is:global>
+  /* Menghilangkan hambatan untuk elemen sticky */
+  body, main {
+    overflow: visible !important;
+  }
+</style>

@@ -1,7 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
-import { Image } from 'astro:assets';
-import BaseLayout from '@/layouts/BaseLayout.astro';
+import BlogPost from '@/layouts/BlogPost.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ id }) => id.startsWith('en/'));
@@ -21,49 +20,22 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content } = await render(post);
+
+// Render konten sekaligus ambil 'headings' buat Table of Contents (ToC)
+const { Content, headings } = await render(post);
+
+// Format tanggal versi English
+const formattedDate = post.data.date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
 ---
 
-<BaseLayout title={post.data.title} reference={post.data.reference}>
-  <article class="mx-auto">
-    <header class="mb-8 px-1">
-      <h1 class="text-4xl font-black tracking-tight mb-4 text-slate-900 leading-tight lg:text-5xl">
-        {post.data.title}
-      </h1>
-      
-      <div class="flex items-center text-sm text-slate-500 gap-2 font-medium">
-        <time datetime={post.data.date.toISOString()}>
-          {post.data.date.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          })}
-        </time>
-        {post.data.description && (
-          <>
-            <span class="text-slate-300">•</span>
-            <span>{post.data.description}</span>
-          </>
-        )}
-      </div>
-    </header>
-
-    {post.data.cover && (
-      <div class="mb-10 overflow-hidden rounded-2xl border border-slate-200 shadow-sm bg-slate-100">
-        <Image 
-          src={post.data.cover} 
-          alt={post.data.coverAlt || post.data.title}
-          class="w-full h-auto object-cover max-h-112.5"
-          loading="eager" 
-        />
-      </div>
-    )}
-
-    <div class="prose prose-slate prose-blue max-w-none lg:prose-lg 
-                prose-headings:tracking-tight prose-headings:font-bold
-                prose-img:rounded-xl prose-img:border prose-img:border-slate-100
-                prose-code:text-blue-600 prose-code:bg-blue-50 prose-code:px-1 prose-code:rounded prose-code:before:content-none prose-code:after:content-none">
-      <Content />
-    </div>
-  </article>
-</BaseLayout>
+<BlogPost 
+  {...post.data} 
+  pubDate={formattedDate} 
+  headings={headings}
+>
+  <Content />
+</BlogPost>

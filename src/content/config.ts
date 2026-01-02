@@ -3,17 +3,16 @@ import { glob } from 'astro/loaders';
 
 const blog = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/blog" }),
-  // Tambahkan ({ image }) di bawah ini untuk mengaktifkan optimasi gambar
   schema: ({ image }) => z.object({
     title: z.string(),
     description: z.string().optional(),
     category: z.string().default("General"), 
     reference: z.string(), 
     date: z.coerce.date(), 
-    // Field 'cover' sekarang mendukung optimasi otomatis (WebP/AVIF/Resize)
-    // Dibuat .optional() supaya postingan tanpa gambar tidak error
+    // Pakai 'cover' agar sinkron dengan frontmatter MD
     cover: image().optional(),
     coverAlt: z.string().optional(),
+    tags: z.array(z.string()).optional(), // Tambahkan ini sekalian buat tags
   }),
 });
 
