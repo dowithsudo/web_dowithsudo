@@ -1,3 +1,20 @@
+/* src/styles/global.css */
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/inter-v20-latin-regular.woff2') format('woff2'); /* Pastikan v20 */
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/inter-v20-latin-700.woff2') format('woff2'); /* Pastikan v20 */
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @import "tailwindcss";
 
 /* Tambahkan baris ini untuk Tailwind v4 */
@@ -33,7 +50,7 @@
 
 /* Base Styles */
 @layer base {
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  
 
   html {
     scroll-behavior: smooth;
