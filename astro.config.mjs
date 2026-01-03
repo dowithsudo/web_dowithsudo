@@ -35,6 +35,10 @@ export default defineConfig({
   ],
 
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    build: {
+      // Menggabungkan CSS kecil langsung ke HTML untuk menghilangkan "Chaining Critical Requests"
+      assetsInlineLimit: 15360, 
+    }
   }
 });

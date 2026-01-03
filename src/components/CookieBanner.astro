@@ -1,0 +1,43 @@
+---
+// src/components/CookieBanner.astro
+const { isEn = false } = Astro.props;
+
+const message = isEn 
+  ? "We use cookies to improve your experience on our website." 
+  : "Kami menggunakan cookie untuk meningkatkan pengalaman Anda di situs kami.";
+const acceptText = isEn ? "Accept" : "Setuju";
+const policyText = isEn ? "Privacy Policy" : "Kebijakan Privasi";
+const policyLink = isEn ? "/en/privacy" : "/id/privacy";
+---
+
+<div id="cookie-banner" class="fixed bottom-0 left-0 right-0 bg-slate-900 text-white p-4 z-9999 transform translate-y-full transition-transform duration-500 shadow-2xl border-t border-[#26a69a]/30">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+    <p class="text-sm md:text-base text-slate-300 text-center md:text-left">
+      {message} 
+      <a href={policyLink} class="text-[#26a69a] underline hover:text-[#4db6ac] ml-1">{policyText}</a>
+    </p>
+    <button 
+      id="accept-cookie" 
+      class="bg-[#26a69a] hover:bg-[#1f8a7f] text-white px-8 py-2 rounded-full font-bold transition-colors whitespace-nowrap"
+    >
+      {acceptText}
+    </button>
+  </div>
+</div>
+
+<script is:inline>
+  const banner = document.getElementById('cookie-banner');
+  const btn = document.getElementById('accept-cookie');
+
+  // Cek apakah user sudah pernah setuju
+  if (!localStorage.getItem('cookie-consent')) {
+    setTimeout(() => {
+      banner.classList.remove('translate-y-full');
+    }, 1000); // Muncul setelah 1 detik
+  }
+
+  btn.addEventListener('click', () => {
+    localStorage.setItem('cookie-consent', 'true');
+    banner.classList.add('translate-y-full');
+  });
+</script>
