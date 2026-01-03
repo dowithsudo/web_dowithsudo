@@ -84,15 +84,19 @@ const enUrl = new URL(isEn ? pathname : alternatePath, siteUrl);
     <link rel="alternate" hreflang="x-default" href={idUrl} />
 
     <meta name="generator" content={Astro.generator} />
+    
+    {/* Penambah skor Best Practices: Memaksa HTTPS untuk request resource */}
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
     {import.meta.env.PROD && (
       <Fragment>
-        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
-        <script is:inline define:vars={{ gaId }}>
+        {/* Menggunakan Partytown untuk script GTM agar tidak membebani Main Thread */}
+        <script type="text/partytown" src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+        <script type="text/partytown" define:vars={{ gaId }}>
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', gaId, { 'font_display': 'swap' });
+          gtag('config', gaId);
         </script>
       </Fragment>
     )}

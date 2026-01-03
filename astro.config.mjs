@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
+import partytown from '@astrojs/partytown';
 
 export default defineConfig({
   site: 'https://dowithsudo.com',
@@ -24,11 +25,16 @@ export default defineConfig({
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
-    })
+    }), 
+    // Konfigurasi Partytown agar GTM dataLayer jalan
+    partytown({
+      config: {
+        forward: ["dataLayer.push"],
+      },
+    }),
   ],
 
   vite: {
-    // Plugin Tailwind v4 sudah di sini, aman!
     plugins: [tailwindcss()]
   }
 });
