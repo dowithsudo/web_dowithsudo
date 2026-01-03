@@ -90,4 +90,44 @@ const isActive = (path: string) => {
       </div>
     </div>
   </nav>
+
+  <script>
+  function setupMenu() {
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    const closeIcon = document.getElementById('close-icon');
+
+    if (menuToggle && mobileMenu && menuIcon && closeIcon) {
+      menuToggle.addEventListener('click', () => {
+        // Toggle menu visibility
+        const isHidden = mobileMenu.classList.toggle('hidden');
+        
+        // Toggle icons
+        if (isHidden) {
+          menuIcon.classList.remove('hidden');
+          closeIcon.classList.add('hidden');
+        } else {
+          menuIcon.classList.add('hidden');
+          closeIcon.classList.remove('hidden');
+        }
+      });
+    }
+
+    // Optional: Tutup menu kalau layar di-resize ke desktop (mencegah glitch)
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768 && mobileMenu) {
+        mobileMenu.classList.add('hidden');
+        menuIcon?.classList.remove('hidden');
+        closeIcon?.classList.add('hidden');
+      }
+    });
+  }
+
+  // Jalankan fungsi saat halaman di-load
+  setupMenu();
+
+  // Kalau kamu pakai Astro View Transitions, tambahkan ini agar script jalan setelah navigasi
+  document.addEventListener('astro:after-swap', setupMenu);
+</script>
 </header>
