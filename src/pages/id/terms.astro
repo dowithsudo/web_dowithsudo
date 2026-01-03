@@ -1,54 +1,72 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
 
-const isEn = false;
+const lastUpdated = "3 Januari 2026";
 ---
 
-<BaseLayout title="Ketentuan Layanan | Dowithsudo" isEn={isEn}>
-  <Header isEn={isEn} />
-  
-  <main class="bg-primary min-h-screen pt-32 pb-20">
-    <div class="container-custom">
-      <div class="max-w-4xl mx-auto bg-secondary/30 p-8 md:p-12 rounded-2xl border border-primary-foreground/10 shadow-xl">
-        
-        <h1 class="text-4xl md:text-5xl font-bold mb-4 text-accent">
-          Ketentuan Layanan
+<BaseLayout title="Ketentuan Layanan | Dowithsudo" isEn={false}>
+  <main class="pt-32 pb-20 px-4 min-h-screen bg-white text-slate-900">
+    <div class="max-w-4xl mx-auto">
+      
+      <header class="mb-12 border-b border-slate-200 pb-8 text-center md:text-left">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4 italic-none">
+          Ketentuan <span class="text-[#26a69a]">Layanan</span>
         </h1>
-        <p class="text-primary-foreground/50 mb-12 pb-6 border-b border-primary-foreground/10">
-          Terakhir diperbarui: {new Date().toLocaleDateString('id-ID')}
+        <p class="text-slate-500 italic">Terakhir diperbarui: {lastUpdated}</p>
+      </header>
+
+      <div class="space-y-10 leading-relaxed text-lg text-slate-700">
+        <p>
+          Dengan mengakses dan menggunakan website ini, Anda setuju untuk terikat oleh Syarat dan Ketentuan berikut. Jika Anda tidak setuju dengan salah satu bagian dari ketentuan ini, harap tidak menggunakan website ini.
         </p>
 
-        <div class="space-y-10 text-primary-foreground/80 leading-relaxed">
-          <section>
-            <h2 class="text-2xl font-bold text-primary-foreground mb-4">1. Penerimaan Ketentuan</h2>
-            <p>Dengan mengakses dan menggunakan layanan Dowithsudo, Anda setuju untuk terikat oleh syarat dan ketentuan ini. Jika Anda tidak setuju, mohon untuk tidak menggunakan layanan kami.</p>
-          </section>
+        <section>
+          <h2 class="text-2xl font-bold text-slate-800 mb-4 underline decoration-[#26a69a] decoration-2 underline-offset-8">1. Penggunaan Website</h2>
+          <p>Website ini disediakan untuk tujuan informasi dan/atau layanan sesuai dengan fungsinya. Anda setuju untuk menggunakan website ini hanya untuk tujuan yang sah dan tidak melanggar hukum yang berlaku.</p>
+        </section>
 
-          <section>
-            <h2 class="text-2xl font-bold text-primary-foreground mb-4">2. Lingkup Layanan</h2>
-            <p>Dowithsudo menyediakan layanan dukungan IT profesional termasuk namun tidak terbatas pada konsultasi teknis, manajemen server, dan instalasi perangkat lunak.</p>
-          </section>
+        <section>
+          <h2 class="text-2xl font-bold text-slate-800 mb-4 underline decoration-[#26a69a] decoration-2 underline-offset-8">2. Hak Kekayaan Intelektual</h2>
+          <p>Seluruh konten yang terdapat di website ini, termasuk namun tidak terbatas pada teks, gambar, logo, dan kode, merupakan milik pemilik website atau pihak terkait dan dilindungi oleh hukum yang berlaku. Dilarang menyalin, mendistribusikan, atau menggunakan konten tanpa izin tertulis.</p>
+        </section>
 
-          <section>
-            <h2 class="text-2xl font-bold text-primary-foreground mb-4">3. Tanggung Jawab Pengguna</h2>
-            <ul class="list-disc ml-6 space-y-3">
-              <li>Memberikan informasi yang akurat dan lengkap terkait kendala teknis yang dihadapi.</li>
-              <li>Melakukan backup data secara rutin sebelum proses perbaikan atau konfigurasi dimulai.</li>
-              <li>Menyediakan akses yang diperlukan (fisik maupun remote) secara aman untuk penyelesaian tugas.</li>
-            </ul>
-          </section>
+        <section>
+          <h2 class="text-2xl font-bold text-slate-800 mb-4 underline decoration-[#26a69a] decoration-2 underline-offset-8">3. Akun dan Keamanan</h2>
+          <p>Jika website menyediakan fitur akun, Anda bertanggung jawab atas kerahasiaan informasi akun Anda dan seluruh aktivitas yang terjadi di bawah akun tersebut.</p>
+        </section>
 
-          <section>
-            <h2 class="text-2xl font-bold text-primary-foreground mb-4">4. Batasan Tanggung Jawab</h2>
-            <p>Kami berusaha memberikan layanan terbaik, namun Dowithsudo tidak bertanggung jawab atas kehilangan data atau gangguan bisnis yang disebabkan oleh kegagalan perangkat keras atau faktor di luar kendali teknis kami.</p>
-          </section>
-        </div>
+        <section>
+          <h2 class="text-2xl font-bold text-slate-800 mb-4 underline decoration-[#26a69a] decoration-2 underline-offset-8">4. Batasan Tanggung Jawab</h2>
+          <p>Pemilik website tidak bertanggung jawab atas kerugian langsung maupun tidak langsung yang timbul akibat penggunaan atau ketidakmampuan penggunaan website ini. Seluruh informasi disediakan “sebagaimana adanya”.</p>
+        </section>
 
+        <section>
+          <h2 class="text-2xl font-bold text-slate-800 mb-4 underline decoration-[#26a69a] decoration-2 underline-offset-8">5. Tautan ke Pihak Ketiga</h2>
+          <p>Website ini dapat berisi tautan ke situs pihak ketiga. Kami tidak memiliki kendali atas konten atau kebijakan situs tersebut dan tidak bertanggung jawab atasnya.</p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-slate-800 mb-4 underline decoration-[#26a69a] decoration-2 underline-offset-8">6. Perubahan Layanan</h2>
+          <p>Kami berhak untuk mengubah, menangguhkan, atau menghentikan sebagian atau seluruh layanan website kapan saja tanpa pemberitahuan sebelumnya.</p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-slate-800 mb-4 underline decoration-[#26a69a] decoration-2 underline-offset-8">7. Perubahan Syarat dan Ketentuan</h2>
+          <p>Syarat dan Ketentuan ini dapat diperbarui dari waktu ke waktu. Perubahan akan berlaku sejak dipublikasikan di halaman ini. Penggunaan website secara berkelanjutan dianggap sebagai persetujuan atas perubahan tersebut.</p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-slate-800 mb-4 underline decoration-[#26a69a] decoration-2 underline-offset-8">8. Hukum yang Berlaku</h2>
+          <p>Syarat dan Ketentuan ini diatur dan ditafsirkan berdasarkan hukum yang berlaku di Republik Indonesia.</p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-slate-800 mb-4 underline decoration-[#26a69a] decoration-2 underline-offset-8">9. Hukum yang Berlaku</h2>
+          <p>Jika Anda memiliki pertanyaan mengenai Syarat dan Ketentuan ini, silakan hubungi kami melalui halaman <a href="/id/contact" class="text-[#26a69a] font-bold hover:underline">kontak</a> yang tersedia di website.</p>
+        </section>
+
+      
       </div>
     </div>
   </main>
-
-  <Footer isEn={isEn} />
 </BaseLayout>

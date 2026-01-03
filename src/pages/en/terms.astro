@@ -1,44 +1,72 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-const isEn = true;
+
+const lastUpdated = "January 3, 2026";
 ---
 
-<BaseLayout title="Terms of Service | Dowithsudo" isEn={isEn}>
-  <main class="container-custom py-20">
-    <div class="max-w-3xl mx-auto prose prose-invert lg:prose-xl">
-      <h1 class="text-4xl font-bold mb-8 text-accent">Terms of Service</h1>
-      <p class="text-primary-foreground/70 mb-6">Last Updated: {new Date().toLocaleDateString('en-US')}</p>
+<BaseLayout title="Terms of Service | Dowithsudo" isEn={true}>
+  <main class="pt-32 pb-20 px-4 min-h-screen bg-white text-slate-900">
+    <div class="max-w-4xl mx-auto">
+      
+      <header class="mb-12 border-b border-slate-200 pb-8 text-center md:text-left">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4 italic-none">
+          Terms of <span class="text-[#26a69a]">Service</span>
+        </h1>
+        <p class="text-slate-500 italic">Last Updated: {lastUpdated}</p>
+      </header>
 
-      <section class="space-y-8 text-primary-foreground/80">
-        <div>
-          <h2 class="text-2xl font-bold text-primary-foreground">1. Acceptance of Terms</h2>
-          <p>By accessing and using Dowithsudo services, you agree to be bound by these terms and conditions. If you do not agree, please refrain from using our services.</p>
-        </div>
+      <div class="space-y-10 leading-relaxed text-lg">
+        <p>
+          By accessing and using this website, you agree to be bound by the following Terms and Conditions. If you do not agree with any part of these terms, please do not use this website.
+        </p>
 
-        <div>
-          <h2 class="text-2xl font-bold text-primary-foreground">2. Scope of Services</h2>
-          <p>Dowithsudo provides professional IT support including but not limited to technical consulting, server management, and software installation.</p>
-        </div>
+        <section>
+          <h2 class="text-2xl font-bold text-slate-800 mb-4 underline decoration-[#26a69a] decoration-2 underline-offset-8">1. Website Use</h2>
+          <p>This website is provided for informational and/or service purposes. You agree to use this website only for lawful purposes and not to violate any applicable laws.</p>
+        </section>
 
-        <div>
-          <h2 class="text-2xl font-bold text-primary-foreground">3. User Responsibilities</h2>
-          <ul class="list-disc ml-6 space-y-2">
-            <li>Providing accurate information regarding technical issues.</li>
-            <li>Ensuring regular data backups before any work begins.</li>
-            <li>Providing necessary access (physical or remote) to complete tasks.</li>
-          </ul>
-        </div>
+        <section>
+          <h2 class="text-2xl font-bold text-slate-800 mb-4 underline decoration-[#26a69a] decoration-2 underline-offset-8">2. Intellectual Property Rights</h2>
+          <p>All content on this website, including but not limited to text, images, logos, and code, is the property of the website owner or related parties and is protected by applicable laws. Copying, distributing, or using content without written permission is prohibited.</p>
+        </section>
 
-        <div>
-          <h2 class="text-2xl font-bold text-primary-foreground">4. Payment</h2>
-          <p>Payments must be made according to the issued invoice. We reserve the right to suspend services in case of late payments.</p>
-        </div>
+        <section>
+          <h2 class="text-2xl font-bold text-slate-800 mb-4 underline decoration-[#26a69a] decoration-2 underline-offset-8">3. Accounts and Security</h2>
+          <p>If the website provides account features, you are responsible for maintaining the confidentiality of your account information and all activities that occur under your account.</p>
+        </section>
 
-        <div>
-          <h2 class="text-2xl font-bold text-primary-foreground">5. Limitation of Liability</h2>
-          <p>Dowithsudo is not responsible for data loss caused by hardware failure or factors beyond our control. Users are fully responsible for their own data security.</p>
-        </div>
-      </section>
+        <section>
+          <h2 class="text-2xl font-bold text-slate-800 mb-4 underline decoration-[#26a69a] decoration-2 underline-offset-8">4. Limitation of Liability</h2>
+          <p>The website owner is not responsible for any direct or indirect losses arising from the use or inability to use this website. All information is provided "as is".</p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-slate-800 mb-4 underline decoration-[#26a69a] decoration-2 underline-offset-8">5. Third-Party Links</h2>
+          <p>This website may contain links to third-party sites. We have no control over the content or policies of those sites and are not responsible for them.</p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-slate-800 mb-4 underline decoration-[#26a69a] decoration-2 underline-offset-8">6. Service Changes</h2>
+          <p>We reserve the right to modify, suspend, or discontinue any or all parts of the website services at any time without prior notice.</p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-slate-800 mb-4 underline decoration-[#26a69a] decoration-2 underline-offset-8">7. Changes to Terms and Conditions</h2>
+          <p>These Terms and Conditions may be updated from time to time. Changes will be effective upon publication. Continued use of the website constitutes acceptance of such changes.</p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-slate-800 mb-4 underline decoration-[#26a69a] decoration-2 underline-offset-8">8. Governing Law</h2>
+          <p>These Terms and Conditions are governed by and construed in accordance with the laws of the Republic of Indonesia.</p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-slate-800 mb-4 underline decoration-[#26a69a] decoration-2 underline-offset-8">9. Contact</h2>
+           <p>If you have any questions regarding these Terms, please contact us through the <a href="/en/contact" class="text-[#26a69a] font-bold hover:underline">contact page</a>.</p>
+        </section>
+          
+        </section>
+      </div>
     </div>
   </main>
 </BaseLayout>
