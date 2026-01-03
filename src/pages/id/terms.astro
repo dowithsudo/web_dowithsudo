@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const isEn = false;
+---
+
+<BaseLayout title="Ketentuan Layanan | Dowithsudo" isEn={isEn}>
+  <Header isEn={isEn} />
+  
+  <main class="bg-primary min-h-screen pt-32 pb-20">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto bg-secondary/30 p-8 md:p-12 rounded-2xl border border-primary-foreground/10 shadow-xl">
+        
+        <h1 class="text-4xl md:text-5xl font-bold mb-4 text-accent">
+          Ketentuan Layanan
+        </h1>
+        <p class="text-primary-foreground/50 mb-12 pb-6 border-b border-primary-foreground/10">
+          Terakhir diperbarui: {new Date().toLocaleDateString('id-ID')}
+        </p>
+
+        <div class="space-y-10 text-primary-foreground/80 leading-relaxed">
+          <section>
+            <h2 class="text-2xl font-bold text-primary-foreground mb-4">1. Penerimaan Ketentuan</h2>
+            <p>Dengan mengakses dan menggunakan layanan Dowithsudo, Anda setuju untuk terikat oleh syarat dan ketentuan ini. Jika Anda tidak setuju, mohon untuk tidak menggunakan layanan kami.</p>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-bold text-primary-foreground mb-4">2. Lingkup Layanan</h2>
+            <p>Dowithsudo menyediakan layanan dukungan IT profesional termasuk namun tidak terbatas pada konsultasi teknis, manajemen server, dan instalasi perangkat lunak.</p>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-bold text-primary-foreground mb-4">3. Tanggung Jawab Pengguna</h2>
+            <ul class="list-disc ml-6 space-y-3">
+              <li>Memberikan informasi yang akurat dan lengkap terkait kendala teknis yang dihadapi.</li>
+              <li>Melakukan backup data secara rutin sebelum proses perbaikan atau konfigurasi dimulai.</li>
+              <li>Menyediakan akses yang diperlukan (fisik maupun remote) secara aman untuk penyelesaian tugas.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-bold text-primary-foreground mb-4">4. Batasan Tanggung Jawab</h2>
+            <p>Kami berusaha memberikan layanan terbaik, namun Dowithsudo tidak bertanggung jawab atas kehilangan data atau gangguan bisnis yang disebabkan oleh kegagalan perangkat keras atau faktor di luar kendali teknis kami.</p>
+          </section>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <Footer isEn={isEn} />
+</BaseLayout>

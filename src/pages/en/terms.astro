@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const isEn = true;
+---
+
+<BaseLayout title="Terms of Service | Dowithsudo" isEn={isEn}>
+  <main class="container-custom py-20">
+    <div class="max-w-3xl mx-auto prose prose-invert lg:prose-xl">
+      <h1 class="text-4xl font-bold mb-8 text-accent">Terms of Service</h1>
+      <p class="text-primary-foreground/70 mb-6">Last Updated: {new Date().toLocaleDateString('en-US')}</p>
+
+      <section class="space-y-8 text-primary-foreground/80">
+        <div>
+          <h2 class="text-2xl font-bold text-primary-foreground">1. Acceptance of Terms</h2>
+          <p>By accessing and using Dowithsudo services, you agree to be bound by these terms and conditions. If you do not agree, please refrain from using our services.</p>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold text-primary-foreground">2. Scope of Services</h2>
+          <p>Dowithsudo provides professional IT support including but not limited to technical consulting, server management, and software installation.</p>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold text-primary-foreground">3. User Responsibilities</h2>
+          <ul class="list-disc ml-6 space-y-2">
+            <li>Providing accurate information regarding technical issues.</li>
+            <li>Ensuring regular data backups before any work begins.</li>
+            <li>Providing necessary access (physical or remote) to complete tasks.</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold text-primary-foreground">4. Payment</h2>
+          <p>Payments must be made according to the issued invoice. We reserve the right to suspend services in case of late payments.</p>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold text-primary-foreground">5. Limitation of Liability</h2>
+          <p>Dowithsudo is not responsible for data loss caused by hardware failure or factors beyond our control. Users are fully responsible for their own data security.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+</BaseLayout>

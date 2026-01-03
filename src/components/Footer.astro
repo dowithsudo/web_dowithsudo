@@ -4,6 +4,7 @@ import Maskot from './Maskot.astro';
 const { isEn } = Astro.props;
 
 const currentYear = new Date().getFullYear();
+const langPath = isEn ? "/en" : "/id";
 
 const content = {
   description: isEn 
@@ -12,6 +13,17 @@ const content = {
   quickLinks: isEn ? "Quick Links" : "Tautan Cepat",
   legal: isEn ? "Legal" : "Hukum",
   contact: isEn ? "Contact" : "Kontak",
+  menu: {
+    home: isEn ? "Home" : "Beranda",
+    services: isEn ? "Services" : "Layanan",
+    // DISESUAIKAN: Karena di tree kamu namanya 'services.astro' baik di folder en maupun id
+    servicesSlug: "/services", 
+    blog: isEn ? "Blog" : "Blog",
+    about: isEn ? "About Us" : "Tentang Kami",
+    contact: isEn ? "Contact" : "Kontak",
+    terms: isEn ? "Terms of Service" : "Ketentuan Layanan",
+    privacy: isEn ? "Privacy Policy" : "Kebijakan Privasi",
+  }
 };
 ---
 
@@ -19,15 +31,13 @@ const content = {
   <div class="container-custom py-16 md:py-20">
     <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-4 italic-none">
       
-      {/* Kolom Pertama: Maskot Gede & Deskripsi */}
+      {/* Kolom Pertama: Maskot & Brand */}
       <div class="space-y-6 flex flex-col items-center md:items-start text-center md:text-left">
         <div class="flex flex-col gap-2">
-          {/* UKURAN DINAIKKAN KE 120 */}
           <div class="animate-float-fancy drop-shadow-[0_10px_20px_rgba(38,166,154,0.4)]">
             <Maskot size={120} />
           </div>
-          
-          <a href={isEn ? "/en" : "/id"} class="text-2xl font-bold tracking-tight mt-2 block">
+          <a href={langPath} class="text-2xl font-bold tracking-tight mt-2 block">
             >_Do<span class="text-accent">withsudo</span>
           </a>
         </div>
@@ -40,20 +50,27 @@ const content = {
       <div class="space-y-6">
         <h4 class="font-bold text-lg">{content.quickLinks}</h4>
         <ul class="space-y-3 text-sm text-primary-foreground/70">
-          <li><a href={isEn ? "/en" : "/id"} class="hover:text-accent transition-colors">Home</a></li>
-          <li><a href="#services" class="hover:text-accent transition-colors">Services</a></li>
-          <li><a href="/id/blog" class="hover:text-accent transition-colors">Blog</a></li>
-          <li><a href="/id/about" class="hover:text-accent transition-colors">About</a></li>
-          <li><a href="/id/contact" class="hover:text-accent transition-colors">Contact</a></li>
+          <li><a href={langPath} class="hover:text-accent transition-colors">{content.menu.home}</a></li>
+          
+          {/* SEKARANG AKAN MENGARAH KE /id/services atau /en/services */}
+          <li>
+            <a href={`${langPath}${content.menu.servicesSlug}`} class="hover:text-accent transition-colors">
+              {content.menu.services}
+            </a>
+          </li>
+
+          <li><a href={`${langPath}/blog`} class="hover:text-accent transition-colors">{content.menu.blog}</a></li>
+          <li><a href={`${langPath}/about`} class="hover:text-accent transition-colors">{content.menu.about}</a></li>
+          <li><a href={`${langPath}/contact`} class="hover:text-accent transition-colors">{content.menu.contact}</a></li>
         </ul>
       </div>
 
-      {/* Sisanya tetap sama... */}
+      {/* Hukum & Kontak tetap sama seperti sebelumnya... */}
       <div class="space-y-6">
         <h4 class="font-bold text-lg">{content.legal}</h4>
         <ul class="space-y-3 text-sm text-primary-foreground/70">
-          <li><a href="/terms" class="hover:text-accent transition-colors">Terms of Service</a></li>
-          <li><a href="/privacy" class="hover:text-accent transition-colors">Privacy Policy</a></li>
+          <li><a href={`${langPath}/terms`} class="hover:text-accent transition-colors">{content.menu.terms}</a></li>
+          <li><a href={`${langPath}/privacy`} class="hover:text-accent transition-colors">{content.menu.privacy}</a></li>
         </ul>
       </div>
 
@@ -70,18 +87,8 @@ const content = {
       </div>
     </div>
     
-    {/* Copyright Section... */}
+    <div class="mt-16 pt-8 border-t border-primary-foreground/10 text-center text-sm text-primary-foreground/50">
+      <p>&copy; {currentYear} Dowithsudo. All rights reserved.</p>
+    </div>
   </div>
 </footer>
-
-<style>
-  /* Animasi yang lebih hidup: naik turun + goyang dikit */
-  @keyframes float-fancy {
-    0% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-15px) rotate(5deg); }
-    100% { transform: translateY(0px) rotate(0deg); }
-  }
-  .animate-float-fancy {
-    animation: float-fancy 5s ease-in-out infinite;
-  }
-</style>
