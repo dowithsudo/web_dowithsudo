@@ -20,7 +20,7 @@ const isActive = (path: string) => {
 };
 ---
 
-<header class="sticky top-0 z-50 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80 border-b border-border">
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200">
   <nav class="container-custom">
     <div class="flex h-16 items-center justify-between">
       <a href={isEn ? "/en/" : "/id/"} class="flex items-center gap-3 group transition-transform hover:scale-105">
@@ -28,7 +28,7 @@ const isActive = (path: string) => {
           size={48} 
           className="group-hover:rotate-12 transition-all duration-300 drop-shadow-sm" 
         />
-        <span class="text-xl font-bold text-foreground tracking-tight">
+        <span class="text-xl font-bold text-slate-900 tracking-tight">
           >_Do<span class="text-emerald-800">WithSudo</span>
         </span>
       </a>
@@ -38,10 +38,10 @@ const isActive = (path: string) => {
         {navLinks.map((link) => (
           <a
             href={link.path}
-            class={`text-sm font-semibold transition-colors hover:text-emerald-900 ${
+            class={`text-sm font-bold transition-colors hover:text-emerald-900 ${
               isActive(link.path) 
-                ? "text-emerald-900 underline underline-offset-4" 
-                : "text-slate-800" 
+                ? "text-emerald-900 underline underline-offset-8 decoration-2" 
+                : "text-slate-700" 
             }`}
           >
             {link.name}
@@ -50,50 +50,47 @@ const isActive = (path: string) => {
       </div>
 
       <div class="flex items-center gap-2 md:gap-4">
-        {/* Switcher Bahasa */}
         <a 
           href={alternatePath}
-          class="text-[10px] md:text-xs font-bold px-3 py-1.5 rounded-full border border-border bg-secondary hover:bg-emerald-800 hover:text-white transition-all flex items-center gap-1"
+          class="text-[10px] md:text-xs font-black px-3 py-1.5 rounded-full border-2 border-slate-200 bg-slate-50 text-slate-800 hover:border-emerald-800 hover:text-emerald-800 transition-all flex items-center gap-1"
           aria-label="Switch Language"
         >
           {isEn ? "🇮🇩 ID" : "🇺🇸 EN"}
         </a>
 
-        {/* Tombol Contact Desktop */}
         <a 
           href={isEn ? "/en/contact" : "/id/contact"} 
-          class="hidden md:inline-flex items-center justify-center rounded-md bg-emerald-800 px-4 py-2 text-sm font-bold text-white hover:bg-emerald-900 transition-colors"
+          class="hidden md:inline-flex items-center justify-center rounded-md bg-emerald-800 px-5 py-2.5 text-sm font-black text-white hover:bg-emerald-900 transition-all shadow-md active:scale-95"
         >
           {isEn ? "Get In Touch" : "Hubungi Saya"}
         </a>
 
-        {/* Hamburger Menu Button */}
-        <button id="menu-toggle" class="md:hidden p-2 text-foreground" aria-label="Toggle menu">
-          <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
-          <svg id="close-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        <button id="menu-toggle" class="md:hidden p-2 text-slate-900" aria-label="Toggle menu">
+          <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
+          <svg id="close-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
       </div>
     </div>
 
     {/* Mobile Menu */}
-    <div id="mobile-menu" class="hidden md:hidden border-t border-border bg-background pb-6">
-      <div class="py-4 space-y-1">
+    <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white shadow-xl">
+      <div class="py-6 space-y-2 px-2">
         {navLinks.map((link) => (
           <a
             href={link.path}
-            class={`block py-4 px-4 text-lg font-bold transition-colors ${
+            class={`block py-4 px-4 text-lg font-black rounded-lg transition-colors ${
               isActive(link.path)
-                ? "text-emerald-900 bg-secondary"
-                : "text-slate-800 hover:bg-secondary"
+                ? "text-emerald-900 bg-emerald-50"
+                : "text-slate-800 hover:bg-slate-50"
             }`}
           >
             {link.name}
           </a>
         ))}
-        <div class="px-4 pt-4">
+        <div class="pt-6 px-2">
            <a 
             href={isEn ? "/en/contact" : "/id/contact"} 
-            class="flex w-full items-center justify-center rounded-md bg-emerald-800 py-4 text-base font-bold text-white shadow-lg"
+            class="flex w-full items-center justify-center rounded-xl bg-emerald-800 py-5 text-lg font-black text-white shadow-lg active:scale-95 transition-transform"
           >
             {isEn ? "Get In Touch" : "Hubungi Saya"}
           </a>
@@ -115,13 +112,8 @@ const isActive = (path: string) => {
 
         newToggle.addEventListener('click', () => {
           const isHidden = mobileMenu.classList.toggle('hidden');
-          if (isHidden) {
-            menuIcon.classList.remove('hidden');
-            closeIcon.classList.add('hidden');
-          } else {
-            menuIcon.classList.add('hidden');
-            closeIcon.classList.remove('hidden');
-          }
+          menuIcon.classList.toggle('hidden', !isHidden);
+          closeIcon.classList.toggle('hidden', isHidden);
         });
       }
     }
