@@ -22,27 +22,24 @@ const isActive = (path: string) => {
 
 <header class="sticky top-0 z-50 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80 border-b border-border">
   <nav class="container-custom">
-    {/* Tinggi div h-16 tetap aman untuk maskot size 48-50 */}
     <div class="flex h-16 items-center justify-between">
       <a href={isEn ? "/en/" : "/id/"} class="flex items-center gap-3 group transition-transform hover:scale-105">
-        
-        {/* UKURAN HEADER DINAIKKAN KE 48 agar lebih terlihat detailnya */}
         <Maskot 
           size={48} 
           className="group-hover:rotate-12 transition-all duration-300 drop-shadow-sm" 
         />
-
         <span class="text-xl font-bold text-foreground tracking-tight">
-          >_Do<span class="text-accent">WithSudo</span>
+          >_Do<span class="text-emerald-700">WithSudo</span>
         </span>
       </a>
 
+      {/* Desktop Navigation */}
       <div class="hidden md:flex items-center gap-8">
         {navLinks.map((link) => (
           <a
             href={link.path}
-            class={`text-sm font-medium transition-colors hover:text-accent ${
-              isActive(link.path) ? "text-accent" : "text-muted-foreground"
+            class={`text-sm font-semibold transition-colors hover:text-emerald-800 ${
+              isActive(link.path) ? "text-emerald-800 underline underline-offset-4" : "text-slate-600"
             }`}
           >
             {link.name}
@@ -50,60 +47,76 @@ const isActive = (path: string) => {
         ))}
       </div>
 
-      <div class="hidden md:flex items-center gap-4">
+      <div class="flex items-center gap-2 md:gap-4">
+        {/* Switcher Bahasa: Sekarang muncul di Mobile & Desktop */}
         <a 
           href={alternatePath}
-          class="text-xs font-bold px-3 py-1.5 rounded-full border border-border bg-secondary hover:bg-accent hover:text-white transition-all"
+          class="text-[10px] md:text-xs font-bold px-3 py-1.5 rounded-full border border-border bg-secondary hover:bg-emerald-700 hover:text-white transition-all flex items-center gap-1"
+          aria-label="Switch Language"
         >
           {isEn ? "🇮🇩 ID" : "🇺🇸 EN"}
         </a>
 
+        {/* Tombol Contact Desktop */}
         <a 
           href={isEn ? "/en/contact" : "/id/contact"} 
-          class="inline-flex items-center justify-center rounded-md bg-accent px-4 py-2 text-sm font-medium text-accent-foreground hover:bg-accent/90 transition-colors"
+          class="hidden md:inline-flex items-center justify-center rounded-md bg-emerald-700 px-4 py-2 text-sm font-bold text-white hover:bg-emerald-800 transition-colors"
         >
           {isEn ? "Get In Touch" : "Hubungi Saya"}
         </a>
-      </div>
 
-      <button id="menu-toggle" class="md:hidden p-2 -mr-2 text-foreground" aria-label="Toggle menu">
-        <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
-        <svg id="close-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-      </button>
+        {/* Hamburger Menu Button */}
+        <button id="menu-toggle" class="md:hidden p-2 text-foreground" aria-label="Toggle menu">
+          <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
+          <svg id="close-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
     </div>
 
     {/* Mobile Menu */}
-    <div id="mobile-menu" class="hidden md:hidden border-t border-border">
+    <div id="mobile-menu" class="hidden md:hidden border-t border-border bg-background pb-6">
       <div class="py-4 space-y-1">
         {navLinks.map((link) => (
           <a
             href={link.path}
-            class={`block py-3 px-2 text-base font-medium rounded-md transition-colors ${
+            class={`block py-4 px-4 text-lg font-bold transition-colors ${
               isActive(link.path)
-                ? "text-accent bg-secondary"
-                : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+                ? "text-emerald-800 bg-secondary"
+                : "text-slate-700 hover:bg-secondary"
             }`}
           >
             {link.name}
           </a>
         ))}
+        <div class="px-4 pt-4">
+           <a 
+            href={isEn ? "/en/contact" : "/id/contact"} 
+            class="flex w-full items-center justify-center rounded-md bg-emerald-700 py-4 text-base font-bold text-white shadow-lg"
+          >
+            {isEn ? "Get In Touch" : "Hubungi Saya"}
+          </a>
+        </div>
       </div>
     </div>
   </nav>
 
   <script>
-  function setupMenu() {
+    function setupMenu() {
     const menuToggle = document.getElementById('menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
     const menuIcon = document.getElementById('menu-icon');
     const closeIcon = document.getElementById('close-icon');
 
-    if (menuToggle && mobileMenu && menuIcon && closeIcon) {
-      menuToggle.addEventListener('click', () => {
-        // Toggle menu visibility
+    // Pastikan semua elemen ada sebelum lanjut
+    if (menuToggle && mobileMenu && menuIcon && closeIcon && menuToggle.parentNode) {
+      
+      // Menggunakan cloneNode untuk membersihkan event listener lama (penting buat View Transitions)
+      const newToggle = menuToggle.cloneNode(true) as HTMLElement;
+      menuToggle.parentNode.replaceChild(newToggle, menuToggle);
+
+      newToggle.addEventListener('click', () => {
         const isHidden = mobileMenu.classList.toggle('hidden');
         
-        // Toggle icons
         if (isHidden) {
           menuIcon.classList.remove('hidden');
           closeIcon.classList.add('hidden');
@@ -113,21 +126,9 @@ const isActive = (path: string) => {
         }
       });
     }
-
-    // Optional: Tutup menu kalau layar di-resize ke desktop (mencegah glitch)
-    window.addEventListener('resize', () => {
-      if (window.innerWidth >= 768 && mobileMenu) {
-        mobileMenu.classList.add('hidden');
-        menuIcon?.classList.remove('hidden');
-        closeIcon?.classList.add('hidden');
-      }
-    });
   }
 
-  // Jalankan fungsi saat halaman di-load
-  setupMenu();
-
-  // Kalau kamu pakai Astro View Transitions, tambahkan ini agar script jalan setelah navigasi
-  document.addEventListener('astro:after-swap', setupMenu);
-</script>
+    setupMenu();
+    document.addEventListener('astro:after-swap', setupMenu);
+  </script>
 </header>
