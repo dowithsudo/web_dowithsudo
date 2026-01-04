@@ -38,7 +38,8 @@ export default defineConfig({
     plugins: [tailwindcss()],
     build: {
       // Menggabungkan CSS kecil langsung ke HTML untuk menghilangkan "Chaining Critical Requests"
-      assetsInlineLimit: 20480, 
+      assetsInlineLimit: 20480,
+      cssCodeSplit: false, 
     }
   }
 });

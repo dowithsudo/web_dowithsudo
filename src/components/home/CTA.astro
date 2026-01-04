@@ -11,19 +11,20 @@ const content = {
 };
 ---
 
-<section class="section-padding bg-accent text-accent-foreground">
+<section class="section-padding bg-accent">
   <div class="container-custom">
     <div class="text-center">
-      <h2 class="text-3xl md:text-5xl font-bold mb-6">
+      <h2 class="text-3xl md:text-5xl font-bold mb-6 text-slate-950">
         {content.title}
       </h2>
+      
       <p class="text-lg text-slate-900 font-medium max-w-2xl mx-auto mb-10 leading-relaxed">
         {content.subtitle}
       </p>
       
       <a 
         href={isEn ? "/en/contact" : "/id/contact"} 
-        class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold transition-all duration-300 rounded-lg bg-background text-foreground hover:bg-background/90 hover:scale-105 shadow-lg group"
+        class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold transition-all duration-300 rounded-lg bg-background text-foreground hover:bg-slate-50 hover:scale-105 shadow-lg group"
       >
         {content.button}
         <svg 

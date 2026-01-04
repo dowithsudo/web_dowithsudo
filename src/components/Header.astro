@@ -29,7 +29,7 @@ const isActive = (path: string) => {
           className="group-hover:rotate-12 transition-all duration-300 drop-shadow-sm" 
         />
         <span class="text-xl font-bold text-foreground tracking-tight">
-          >_Do<span class="text-emerald-700">WithSudo</span>
+          >_Do<span class="text-emerald-800">WithSudo</span>
         </span>
       </a>
 
@@ -38,8 +38,10 @@ const isActive = (path: string) => {
         {navLinks.map((link) => (
           <a
             href={link.path}
-            class={`text-sm font-semibold transition-colors hover:text-emerald-800 ${
-              isActive(link.path) ? "text-emerald-800 underline underline-offset-4" : "text-slate-600"
+            class={`text-sm font-semibold transition-colors hover:text-emerald-900 ${
+              isActive(link.path) 
+                ? "text-emerald-900 underline underline-offset-4" 
+                : "text-slate-800" 
             }`}
           >
             {link.name}
@@ -48,10 +50,10 @@ const isActive = (path: string) => {
       </div>
 
       <div class="flex items-center gap-2 md:gap-4">
-        {/* Switcher Bahasa: Sekarang muncul di Mobile & Desktop */}
+        {/* Switcher Bahasa */}
         <a 
           href={alternatePath}
-          class="text-[10px] md:text-xs font-bold px-3 py-1.5 rounded-full border border-border bg-secondary hover:bg-emerald-700 hover:text-white transition-all flex items-center gap-1"
+          class="text-[10px] md:text-xs font-bold px-3 py-1.5 rounded-full border border-border bg-secondary hover:bg-emerald-800 hover:text-white transition-all flex items-center gap-1"
           aria-label="Switch Language"
         >
           {isEn ? "🇮🇩 ID" : "🇺🇸 EN"}
@@ -60,7 +62,7 @@ const isActive = (path: string) => {
         {/* Tombol Contact Desktop */}
         <a 
           href={isEn ? "/en/contact" : "/id/contact"} 
-          class="hidden md:inline-flex items-center justify-center rounded-md bg-emerald-700 px-4 py-2 text-sm font-bold text-white hover:bg-emerald-800 transition-colors"
+          class="hidden md:inline-flex items-center justify-center rounded-md bg-emerald-800 px-4 py-2 text-sm font-bold text-white hover:bg-emerald-900 transition-colors"
         >
           {isEn ? "Get In Touch" : "Hubungi Saya"}
         </a>
@@ -81,8 +83,8 @@ const isActive = (path: string) => {
             href={link.path}
             class={`block py-4 px-4 text-lg font-bold transition-colors ${
               isActive(link.path)
-                ? "text-emerald-800 bg-secondary"
-                : "text-slate-700 hover:bg-secondary"
+                ? "text-emerald-900 bg-secondary"
+                : "text-slate-800 hover:bg-secondary"
             }`}
           >
             {link.name}
@@ -91,7 +93,7 @@ const isActive = (path: string) => {
         <div class="px-4 pt-4">
            <a 
             href={isEn ? "/en/contact" : "/id/contact"} 
-            class="flex w-full items-center justify-center rounded-md bg-emerald-700 py-4 text-base font-bold text-white shadow-lg"
+            class="flex w-full items-center justify-center rounded-md bg-emerald-800 py-4 text-base font-bold text-white shadow-lg"
           >
             {isEn ? "Get In Touch" : "Hubungi Saya"}
           </a>
@@ -102,31 +104,27 @@ const isActive = (path: string) => {
 
   <script>
     function setupMenu() {
-    const menuToggle = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const menuIcon = document.getElementById('menu-icon');
-    const closeIcon = document.getElementById('close-icon');
+      const menuToggle = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const menuIcon = document.getElementById('menu-icon');
+      const closeIcon = document.getElementById('close-icon');
 
-    // Pastikan semua elemen ada sebelum lanjut
-    if (menuToggle && mobileMenu && menuIcon && closeIcon && menuToggle.parentNode) {
-      
-      // Menggunakan cloneNode untuk membersihkan event listener lama (penting buat View Transitions)
-      const newToggle = menuToggle.cloneNode(true) as HTMLElement;
-      menuToggle.parentNode.replaceChild(newToggle, menuToggle);
+      if (menuToggle && mobileMenu && menuIcon && closeIcon && menuToggle.parentNode) {
+        const newToggle = menuToggle.cloneNode(true) as HTMLElement;
+        menuToggle.parentNode.replaceChild(newToggle, menuToggle);
 
-      newToggle.addEventListener('click', () => {
-        const isHidden = mobileMenu.classList.toggle('hidden');
-        
-        if (isHidden) {
-          menuIcon.classList.remove('hidden');
-          closeIcon.classList.add('hidden');
-        } else {
-          menuIcon.classList.add('hidden');
-          closeIcon.classList.remove('hidden');
-        }
-      });
+        newToggle.addEventListener('click', () => {
+          const isHidden = mobileMenu.classList.toggle('hidden');
+          if (isHidden) {
+            menuIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
+          } else {
+            menuIcon.classList.add('hidden');
+            closeIcon.classList.remove('hidden');
+          }
+        });
+      }
     }
-  }
 
     setupMenu();
     document.addEventListener('astro:after-swap', setupMenu);
